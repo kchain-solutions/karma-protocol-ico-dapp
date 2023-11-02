@@ -2,7 +2,7 @@ import React from 'react'
 
 import { ConnectionType, getConnection, tryActivateConnector, tryDeactivateConnector } from '../../utils/connections'
 
-export const Option = ({
+const Web3Option = ({
   isEnabled,
   isConnected,
   connectionType,
@@ -42,3 +42,5 @@ export const Option = ({
     </div>
   )
 }
+
+export default Web3Option
