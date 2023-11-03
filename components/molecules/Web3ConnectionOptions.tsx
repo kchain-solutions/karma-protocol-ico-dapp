@@ -4,6 +4,7 @@ import { ConnectionType, getHasMetaMaskExtensionInstalled } from '../../utils/co
 import { METAMASK_URL } from '../../utils/constants'
 import Web3Option from '../atoms/Web3Option'
 import { Box, Paper } from '@mui/material'
+import { palette } from 'style'
 
 type ConnectOptionsParams = {
   activeConnectionType: ConnectionType | null
@@ -67,7 +68,7 @@ const Web3ConnectionOptions = ({
 	}
 
 	return <Box>
-		<Paper elevation='9'>
+		<Paper elevation={9} sx={{backgroundColor: palette.purple}}>
 			{getOptions(isConnectionActive)}
 		</Paper>
 	</Box>

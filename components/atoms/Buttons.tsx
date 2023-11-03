@@ -10,15 +10,23 @@ export const GradientButton = styled(Button)(() => ({
 	padding: '5px',
 	marginTop: '3px',
 	marginBottom:'3px',
+	'&:hover':{
+		background: palette.pink, 
+		backgroundImage: 'none', 
+	}
 }))
 
 
 export const StandardButton = styled(Button)(() => ({
-	background: palette.pink,
+	backgroundColor: palette.pink,
 	color: 'white',
 	padding: '5px',
 	marginTop: '5px',
 	marginBottom:'5px',
+	'&:hover':{
+		background: palette.cyano, 
+		backgroundImage: 'none', 
+	}
 }))
 
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Button, Popover, Typography } from '@mui/material'
+import { Box, Popover, Typography } from '@mui/material'
 import { useWeb3React } from '@web3-react/core'
 import Web3ConnectionOptions from 'components/molecules/Web3ConnectionOptions'
 import { ConnectionType } from 'utils/connections'
