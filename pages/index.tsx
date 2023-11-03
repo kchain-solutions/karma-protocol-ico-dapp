@@ -1,11 +1,11 @@
-import React from "react"
-import Header from "components/organisms/Header"
-import { Typography } from '@mui/material'
+import React from 'react'
+import Header from 'components/templates/Header'
 
- const Index = () => {
-    return (
-        <Header/>
-    )
+
+const Index = () => {
+	return (
+		<Header/>
+	)
     
 }
 
