@@ -17,10 +17,10 @@ interface ExampleConfig {
 
 // Example Configuration
 export const CurrentConfig: ExampleConfig = {
-  chain: Chain.MAINNET,
-  rpc: {
-    polygon: '',
-    mainnet: '',
-    sepolia: '',
-  },
+	chain: Chain.MAINNET,
+	rpc: {
+		polygon: '',
+		mainnet: '',
+		sepolia: '',
+	},
 }

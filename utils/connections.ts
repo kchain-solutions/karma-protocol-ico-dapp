@@ -3,7 +3,6 @@ import { AddEthereumChainParameter, Connector } from '@web3-react/types'
 
 import { buildCoinbaseWalletConnector } from './coinbase'
 import { CHAIN_INFO } from './constants'
-import { buildGnosisSafeConnector } from './gnosis'
 import { buildInjectedConnector } from './injected'
 import { buildNetworkConnector } from './network'
 import { buildWalletConnectConnector } from './wallet-connect'
@@ -16,7 +15,6 @@ export interface Connection {
 
 export enum ConnectionType {
   COINBASE_WALLET = 'COINBASE_WALLET',
-  GNOSIS_SAFE = 'GNOSIS_SAFE',
   INJECTED = 'INJECTED',
   NETWORK = 'NETWORK',
   WALLET_CONNECT = 'WALLET_CONNECT',
@@ -24,14 +22,14 @@ export enum ConnectionType {
 
 function getIsBraveWallet(): boolean {
 	if (typeof window === 'undefined') {
-		return false  // or another default value suitable for the server-side environment
+		return false  
 	}
 	return window.ethereum?.isBraveWallet ?? false
 }
 
 export function getHasMetaMaskExtensionInstalled(): boolean {
 	if (typeof window === 'undefined') {
-		return false  // or another default value suitable for the server-side environment
+		return false 
 	}
 	return (window.ethereum?.isMetaMask ?? false) && !getIsBraveWallet()
 }
@@ -44,7 +42,6 @@ export const PRIORITIZED_CONNECTORS: { [key in ConnectionType]: Connection } = {
 	[ConnectionType.INJECTED]: buildInjectedConnector(),
 	[ConnectionType.COINBASE_WALLET]: buildCoinbaseWalletConnector(),
 	[ConnectionType.WALLET_CONNECT]: buildWalletConnectConnector(),
-	[ConnectionType.GNOSIS_SAFE]: buildGnosisSafeConnector(),
 	[ConnectionType.NETWORK]: buildNetworkConnector(),
 }
 
@@ -63,8 +60,6 @@ export function getConnection(c: Connector | ConnectionType) {
 			return PRIORITIZED_CONNECTORS[ConnectionType.COINBASE_WALLET]
 		case ConnectionType.WALLET_CONNECT:
 			return PRIORITIZED_CONNECTORS[ConnectionType.WALLET_CONNECT]
-		case ConnectionType.GNOSIS_SAFE:
-			return PRIORITIZED_CONNECTORS[ConnectionType.GNOSIS_SAFE]
 		case ConnectionType.NETWORK:
 			return PRIORITIZED_CONNECTORS[ConnectionType.NETWORK]
 		}

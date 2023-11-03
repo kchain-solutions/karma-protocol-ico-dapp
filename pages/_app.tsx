@@ -4,7 +4,8 @@ import React, { useEffect } from 'react'
 
 import { ConnectionType, getConnection, PRIORITIZED_CONNECTORS } from '../utils/connections'
 import { AppProps } from 'next/app'
-import { Box } from '@mui/material'
+import { Box, ThemeProvider } from '@mui/material'
+import { theme } from 'style'
 
 
 async function connect(connector: Connector) {
@@ -22,7 +23,6 @@ async function connect(connector: Connector) {
 
 const connectEagerly = async () => {
 	await connect(getConnection(ConnectionType.NETWORK).connector)
-	await connect(getConnection(ConnectionType.GNOSIS_SAFE).connector)
 }
 
 
@@ -32,11 +32,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 	}, [])
 
 	return (
-		<Box >
+		<ThemeProvider theme={theme}>
 			<Web3ReactProvider connectors={Object.values(PRIORITIZED_CONNECTORS).map((connector) => [connector.connector, connector.hooks])}>
 				<Component {...pageProps} />
 			</Web3ReactProvider>
-		</Box>
+		</ThemeProvider>
 	)
 }
 

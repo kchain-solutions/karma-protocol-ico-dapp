@@ -1,5 +1,6 @@
 import React from 'react'
-import { Box } from '@mui/material'
+import { Box, Button } from '@mui/material'
+import { GradientButton } from './Buttons'
 
 import { ConnectionType, getConnection, tryActivateConnector, tryDeactivateConnector } from '../../utils/connections'
 
@@ -37,9 +38,9 @@ const Web3Option = ({
 
 	return (
 		<Box>
-			<button onClick={onClick} disabled={!isEnabled}>{`${
-				isConnected ? 'Disconnect' : 'Connect'
-			} ${connectionType}`}</button>
+			<GradientButton onClick={onClick} disabled={!isEnabled}>
+				{`${isConnected ? 'Disconnect' : 'Connect'} ${connectionType}`}
+			</GradientButton>
 		</Box>
 	)
 }

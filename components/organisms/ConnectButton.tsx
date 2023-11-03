@@ -3,6 +3,7 @@ import { Box, Button, Popover, Typography } from '@mui/material'
 import { useWeb3React } from '@web3-react/core'
 import Web3ConnectionOptions from 'components/molecules/Web3ConnectionOptions'
 import { ConnectionType } from 'utils/connections'
+import { StandardButton } from 'components/atoms/Buttons'
 
 
 const ConnectButton = () => {
@@ -30,9 +31,9 @@ const ConnectButton = () => {
 
 	return(<>
 		<Box>
-			<Button aria-describedby={id} variant="contained" onClick={handleClick}>
+			<StandardButton aria-describedby={id} variant="contained" onClick={handleClick}>
 				{buttonLabel}
-			</Button>
+			</StandardButton>
 			<Popover
 				id={id}
 				open={open}

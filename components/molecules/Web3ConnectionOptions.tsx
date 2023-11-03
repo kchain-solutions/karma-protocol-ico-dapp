@@ -3,7 +3,7 @@ import React from 'react'
 import { ConnectionType, getHasMetaMaskExtensionInstalled } from '../../utils/connections'
 import { METAMASK_URL } from '../../utils/constants'
 import Web3Option from '../atoms/Web3Option'
-import { Box } from '@mui/material'
+import { Box, Paper } from '@mui/material'
 
 type ConnectOptionsParams = {
   activeConnectionType: ConnectionType | null
@@ -66,7 +66,11 @@ const Web3ConnectionOptions = ({
 		)
 	}
 
-	return <Box>{getOptions(isConnectionActive)}</Box>
+	return <Box>
+		<Paper elevation='9'>
+			{getOptions(isConnectionActive)}
+		</Paper>
+	</Box>
 }
 
 export default Web3ConnectionOptions
