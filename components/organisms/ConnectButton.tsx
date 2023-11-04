@@ -7,29 +7,29 @@ import { StandardButton } from 'components/atoms/Buttons'
 
 
 const ConnectButton = () => {
-	const [open, setOpen] = useState(false)
-	const [buttonLabel, setButtonLabel] = useState<String>('Connect')
-	const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
+	const [open, setOpen] = useState( false )
+	const [buttonLabel, setButtonLabel] = useState<String>( 'Connect' )
+	const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>( null )
 	const { account, isActive } = useWeb3React()
-	const [connectionType, setConnectionType] = useState<ConnectionType | null>(null)
+	const [connectionType, setConnectionType] = useState<ConnectionType | null>( null )
 
-	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-		setAnchorEl(event.currentTarget)
-		setOpen(true)
+	const handleClick = ( event: React.MouseEvent<HTMLButtonElement> ) => {
+		setAnchorEl( event.currentTarget )
+		setOpen( true )
 	}
-	const handleClose = () => setOpen(false)
+	const handleClose = () => setOpen( false )
 	const id = open ? 'simple-popover' : undefined
 
-	useEffect(()=> {
-		if(isActive) {
-			setButtonLabel(account)
+	useEffect( ()=> {
+		if( isActive ) {
+			setButtonLabel( account )
 		}else{
-			setButtonLabel('Connect')
+			setButtonLabel( 'Connect' )
 		}
-	}, [account, isActive])
+	}, [account, isActive] )
 
 
-	return(<>
+	return( <>
 		<Box>
 			<StandardButton aria-describedby={id} variant="contained" onClick={handleClick}>
 				{buttonLabel}
@@ -52,7 +52,7 @@ const ConnectButton = () => {
 				/>
 			</Popover>
 		</Box>
-	</>)
+	</> )
 }
 
 

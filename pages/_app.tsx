@@ -8,32 +8,32 @@ import { Box, ThemeProvider } from '@mui/material'
 import { theme } from 'style'
 
 
-async function connect(connector: Connector) {
+async function connect( connector: Connector ) {
 	try {
-		if (connector.connectEagerly) {
+		if ( connector.connectEagerly ) {
 			await connector.connectEagerly()
 		} else {
 			await connector.activate()
 		}
-	} catch (error) {
-		console.debug(`web3-react eager connection error: ${error}`)
+	} catch ( error ) {
+		console.debug( `web3-react eager connection error: ${error}` )
 	}
 }
 
 
 const connectEagerly = async () => {
-	await connect(getConnection(ConnectionType.NETWORK).connector)
+	await connect( getConnection( ConnectionType.NETWORK ).connector )
 }
 
 
-function MyApp({ Component, pageProps }: AppProps) {
-	useEffect(() => {
+function MyApp( { Component, pageProps }: AppProps ) {
+	useEffect( () => {
 		connectEagerly()
-	}, [])
+	}, [] )
 
 	return (
 		<ThemeProvider theme={theme}>
-			<Web3ReactProvider connectors={Object.values(PRIORITIZED_CONNECTORS).map((connector) => [connector.connector, connector.hooks])}>
+			<Web3ReactProvider connectors={Object.values( PRIORITIZED_CONNECTORS ).map( ( connector ) => [connector.connector, connector.hooks] )}>
 				<Component {...pageProps} />
 			</Web3ReactProvider>
 		</ThemeProvider>

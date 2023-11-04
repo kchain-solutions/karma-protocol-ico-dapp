@@ -9,20 +9,20 @@ import { palette } from 'style'
 type ConnectOptionsParams = {
   activeConnectionType: ConnectionType | null
   isConnectionActive: boolean
-  onActivate: (connectionType: ConnectionType) => void
-  onDeactivate: (connectionType: null) => void
+  onActivate: ( connectionType: ConnectionType ) => void
+  onDeactivate: ( connectionType: null ) => void
 }
 
-const Web3ConnectionOptions = ({
+const Web3ConnectionOptions = ( {
 	activeConnectionType,
 	isConnectionActive,
 	onActivate,
 	onDeactivate,
-}: ConnectOptionsParams) => {
-	function getOptions(isActive: boolean) {
+}: ConnectOptionsParams ) => {
+	function getOptions( isActive: boolean ) {
 		const hasMetaMaskExtension = getHasMetaMaskExtensionInstalled()
 
-		const isNoOptionActive = !isActive || (isActive && activeConnectionType === null)
+		const isNoOptionActive = !isActive || ( isActive && activeConnectionType === null )
 
 		const metaMaskOption = hasMetaMaskExtension ? (
 			<Web3Option
@@ -69,7 +69,7 @@ const Web3ConnectionOptions = ({
 
 	return <Box>
 		<Paper elevation={9} sx={{backgroundColor: palette.purple}}>
-			{getOptions(isConnectionActive)}
+			{getOptions( isConnectionActive )}
 		</Paper>
 	</Box>
 }
