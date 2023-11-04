@@ -5,6 +5,7 @@ import Header from 'components/templates/Header'
 const Index = () => {
 	return (
 		<Header/>
+		
 	)
     
 }

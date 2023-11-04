@@ -16,7 +16,6 @@ const Header = () => {
 				<Box sx={{ flexGrow: 1 }}>
 					<AppBar position="static">
 						<Toolbar sx={{ display: 'flex', justifyContent: 'space-between',backgroundColor: palette.purple }}>
-							{/* Logo and Title Box */}
 							<Box display="flex" alignItems="center">
 								<Box sx={{ width: 50, height: 50, marginRight: 2 }}>
 									<img
@@ -34,6 +33,11 @@ const Header = () => {
 					</AppBar>
 				</Box>
 			</Paper>
+			<img
+				src='/banner.png'
+				alt="Earnkarma logo"
+				style={{ width: '100%', height: '100%' }}
+			/>
 		</>
 
 	)
