@@ -4,7 +4,7 @@ import { GradientButton } from './Buttons'
 
 import { ConnectionType, getConnection, tryActivateConnector, tryDeactivateConnector } from '../../utils/connections'
 
-const Web3Option = ({
+const Web3Option = ( {
 	isEnabled,
 	isConnected,
 	connectionType,
@@ -14,25 +14,27 @@ const Web3Option = ({
   isEnabled: boolean
   isConnected: boolean
   connectionType: ConnectionType
-  onActivate: (connectionType: ConnectionType) => void
-  onDeactivate: (connectionType: null) => void
-}) => {
+  onActivate: ( connectionType: ConnectionType ) => void
+  onDeactivate: ( connectionType: null ) => void
+} ) => {
 	const onClick = async () => {
-		if (isConnected) {
-			const deactivation = await tryDeactivateConnector(getConnection(connectionType).connector)
+		if ( isConnected ) {
+			const deactivation = await tryDeactivateConnector( getConnection( connectionType ).connector )
 			// undefined means the deactivation failed
-			if (deactivation === undefined) {
+			if ( deactivation === undefined ) {
 				return
 			}
-			onDeactivate(deactivation)
+			onDeactivate( deactivation )
+			localStorage.removeItem( 'connection-type' )
 			return
 		}
 
-		const activation = await tryActivateConnector(getConnection(connectionType).connector)
-		if (!activation) {
+		const activation = await tryActivateConnector( getConnection( connectionType ).connector )
+		if ( !activation ) {
 			return
 		}
-		onActivate(activation)
+		onActivate( activation )
+		localStorage.setItem( 'connection-type', connectionType )
 		return
 	}
 

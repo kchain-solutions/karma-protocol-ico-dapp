@@ -1,11 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { formatUnits, parseUnits } from 'ethers'
-import GlobalStateContext from '../provider/GlobalState'
-//TODO install icons package
-//LOAD provider
+import { useWeb3React } from '@web3-react/core'
 import { Paper, Box, TextField, Grid, InputAdornment, IconButton, Typography, Button, Snackbar, Link, Divider } from '@mui/material'
 import { getInvestorVaultConversionRate, buyGldkrm, getGldkrmBalance, getStablecoinBalance, approveStablecoinTx } from '../../utils/contractInterface'
-import { formFieldStyle, formBoxStyle } from '../style/muiStyle'
+import { } from '../../style'
 import PaymentIcon from '@mui/icons-material/Payment'
 import CloseIcon from '@mui/icons-material/Close'
 import LockOpenIcon from '@mui/icons-material/LockOpen'
@@ -14,23 +12,9 @@ import HourglassBottomIcon from '@mui/icons-material/HourglassBottom'
 
 const Ico = () => {
 
-	const { globalState } = useContext( GlobalStateContext )
+	const [stableCoinOption, setStableCoinOption] = useState<string>( 'USDC' )
+	const { active, account, library } = useWeb3React()
 
-	const [usdc, setUsdc] = useState( 0 )
-	const [usdcError, setUsdcError] = useState( false )
-	const [usdcHelperText, setUsdcHelperText] = useState( '' )
-	const [usdcSignerBalance, setUsdcSignerBalance] = useState( '0' )
-	const [gldkrm, setGldkrm] = useState( 0 )
-	const [gldkrmContractBalance, setGldkrmContractBalance] = useState( '0' )
-	const [gldkrmSignerBalance, setGldkrmSignerBalance] = useState( '0' )
-	const [rate, setRate] = useState( 0 )
-	const [isOpenSnackbar, setIsOpenSnackbar] = useState( false )
-	const [snackbarMessage, setSnackbarMessage] = useState( '' )
-	const [signerAddress, setSignerAddress] = useState( null )
-
-	const [isApproved, setIsApproved] = useState( false )
-	const [isPending, setIsPending] = useState( false )
-	const [isToBeProcessed, setIsToBeProcessed] = useState( true )
 
 	const loadBalances = ( provider, signerAddress ) => {
 		if ( signerAddress ) {
@@ -50,18 +34,8 @@ const Ico = () => {
 	}
 
 	useEffect( () => {
-		if ( globalState?.ethersProvider ) {
-			globalState.ethersProvider.getSigner().then( ( account ) => {
-				setSignerAddress( account?.address )
-				loadBalances( globalState.ethersProvider, account?.address )
-			} )
-			getInvestorVaultConversionRate( globalState.ethersProvider ).then( ( response ) => {
-				setRate( response )
-			} ).catch( ( error ) => {
-				console.error( 'Invest error ' + error )
-			} )
-		}
-	}, [globalState] )
+
+	}, [] )
 
 	useEffect( () => {
 		if ( rate > 0 )

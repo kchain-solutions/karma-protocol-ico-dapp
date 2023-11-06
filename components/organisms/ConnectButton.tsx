@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { Box, Popover, Typography } from '@mui/material'
 import { useWeb3React } from '@web3-react/core'
 import Web3ConnectionOptions from 'components/molecules/Web3ConnectionOptions'
-import { ConnectionType } from 'utils/connections'
+import { ConnectionType, getConnection, tryActivateConnector } from 'utils/connections'
 import { StandardButton } from 'components/atoms/Buttons'
+import { isParsableToNumber } from 'utils/parsing'
 
 
 const ConnectButton = () => {
@@ -19,6 +20,28 @@ const ConnectButton = () => {
 	}
 	const handleClose = () => setOpen( false )
 	const id = open ? 'simple-popover' : undefined
+
+	useEffect( () => {
+		let connectionType =  localStorage.getItem( 'connection-type' ) 
+		switch ( connectionType ){
+		case 'INJECTED':
+			tryActivateConnector( getConnection( ConnectionType.INJECTED ).connector ).then( activation => {
+				if( activation ) setConnectionType( activation )
+			} )
+			break
+		case 'COINBASE_WALLET':
+			tryActivateConnector( getConnection( ConnectionType.COINBASE_WALLET ).connector ).then( activation => {
+				if( activation ) setConnectionType( activation )
+			} )
+			break
+		case 'WALLET_CONNECT':
+			tryActivateConnector( getConnection( ConnectionType.WALLET_CONNECT ).connector ).then( activation => {
+				if( activation ) setConnectionType( activation )
+			} )
+			break
+		}
+		
+	}, [] )
 
 	useEffect( ()=> {
 		if( isActive ) {
@@ -57,3 +80,7 @@ const ConnectButton = () => {
 
 
 export default ConnectButton
+
+function onActivate( activation: ConnectionType ) {
+	throw new Error( 'Function not implemented.' )
+}

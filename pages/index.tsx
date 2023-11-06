@@ -7,7 +7,6 @@ const Index = () => {
 	return (
 		<>
 			<Header />
-			<Ico />
 		</>
 	)
     
