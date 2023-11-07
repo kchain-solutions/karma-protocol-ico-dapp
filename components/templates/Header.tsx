@@ -1,9 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react'
-import ConnectButton from 'components/organisms/connectButton'
-import { AppBar, Box, Link, Paper, Toolbar, Typography } from '@mui/material'
+import ConnectButton from 'components/organisms/ConnectButton'
+import { AppBar, Box, Paper, Toolbar, Typography } from '@mui/material'
 import { palette } from 'style'
-import logo_image from '../../public/favicon.png'
 import Image from 'next/image'
 
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import { formatUnits, parseUnits } from 'ethers'
 import { useWeb3React } from '@web3-react/core'
 import { Paper, Box, TextField, Grid, InputAdornment, IconButton, Typography, Button, Snackbar, Link, Divider } from '@mui/material'
-import { getInvestorVaultConversionRate, buyGldkrm, getGldkrmBalance, getStablecoinBalance, approveStablecoinTx } from '../../utils/contractInterface'
+//import { getInvestorVaultConversionRate, buyGldkrm, getGldkrmBalance, getStablecoinBalance, approveStablecoinTx } from '../../utils/contractInterface'
 import { } from '../../style'
 import PaymentIcon from '@mui/icons-material/Payment'
 import CloseIcon from '@mui/icons-material/Close'
@@ -10,15 +10,27 @@ import LockOpenIcon from '@mui/icons-material/LockOpen'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 import HourglassBottomIcon from '@mui/icons-material/HourglassBottom'
 
+
+const STABLECOINS = [{currency: 'USDC', address: process.env.REACT_APP_USDC_ADDRESS}, {currency: 'USDT', address:process.env.REACT_APP_USDT_ADDRESS}]
+const RATE = 30
+
+
 const Ico = () => {
 
-	const [stableCoinOption, setStableCoinOption] = useState<string>( 'USDC' )
 	const { active, account, library } = useWeb3React()
 
+	const [stableCoinOption, setStableCoinOption] = useState<string>( STABLECOINS[0].currency )
+	const [stableCoinAddress, setStableCoinAddress] = useState<string>( STABLECOINS[0].address )
+	const [StableCoinBalance, setStableCoinBalance] = useState<number> ( 0 )
+	const [gldkrmUserBalance, setGldkrmUserBalance] = useState<number>( 0 )
+	const [gldkrmContractBalance, setGldkrmContractBalance] = useState<number>( 0 )
+	const [toastMessage, setToastMessage] = useState<string>( '' )
+	
 
-	const loadBalances = ( provider, signerAddress ) => {
-		if ( signerAddress ) {
-			getGldkrmBalance( provider, signerAddress ).then( ( balance ) => {
+
+	const loadBalances = ( provider, active ) => {
+		if ( active ) {
+			getGldkrmBalance( provider, account ).then( ( balance ) => {
 				balance = formatUnits( balance, 'ether' )
 				setGldkrmSignerBalance( balance )
 			} )
@@ -26,7 +38,7 @@ const Ico = () => {
 				balance = formatUnits( balance, 'ether' )
 				setGldkrmContractBalance( balance )
 			} )
-			getStablecoinBalance( provider, signerAddress ).then( ( balance ) => {
+			getStablecoinBalance( provider, account ).then( ( balance ) => {
 				balance = formatUnits( balance, 'ether' )
 				setUsdcSignerBalance( balance )
 			} )
@@ -37,14 +49,10 @@ const Ico = () => {
 
 	}, [] )
 
-	useEffect( () => {
-		if ( rate > 0 )
-			setGldkrm( usdc * rate )
-		loadBalances( globalState.ethersProvider, signerAddress )
-	}, [usdc] )
+
 
 	const handleDollarChange = ( e ) => {
-		setUsdc( e.target.value )
+		setStableCoinBalance( e.target.value )
 	}
 
 	const validateUsdc = ( value ) => {
@@ -113,7 +121,7 @@ const Ico = () => {
 				setSnackbarMessage( 'Transaction succeed. TX Hash: ' + tx.hash )
 				setIsToBeProcessed( true )
 				setIsApproved( false )
-				loadBalances( globalState.ethersProvider, signerAddress )
+				loadBalances( globalState.ethersProvider, account )
 				setUsdc( 0 )
 			} ).catch( ( error ) => {
 				setIsToBeProcessed( true )
@@ -264,5 +272,6 @@ const Ico = () => {
 
 	</> )
 }
+
 
 export default Ico

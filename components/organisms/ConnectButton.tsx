@@ -4,7 +4,7 @@ import { useWeb3React } from '@web3-react/core'
 import Web3ConnectionOptions from 'components/molecules/Web3ConnectionOptions'
 import { ConnectionType, getConnection, tryActivateConnector } from 'utils/connections'
 import { StandardButton } from 'components/atoms/Buttons'
-import { isParsableToNumber } from 'utils/parsing'
+import { ellipsis, isParsableToNumber } from 'utils/parsing'
 
 
 const ConnectButton = () => {
@@ -45,7 +45,7 @@ const ConnectButton = () => {
 
 	useEffect( ()=> {
 		if( isActive ) {
-			setButtonLabel( account )
+			setButtonLabel( `Account: ${ellipsis( account, 7, 5 )}` )
 		}else{
 			setButtonLabel( 'Connect' )
 		}
