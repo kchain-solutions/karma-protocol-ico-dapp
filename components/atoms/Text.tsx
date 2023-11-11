@@ -1,8 +1,13 @@
 import { Typography } from '@mui/material'
+import { styled } from '@mui/material/styles'
 import { palette } from 'style'
 
-export const BodyText = (text: string) => {
-	<Typography variant = 'body2' sx={{color: palette.grey}}>
-        `${text}`
-	</Typography>
-}
+
+export const TitleText = styled( Typography )( () => ( {
+	color: palette.pink
+} ) )
+
+
+export const BodyText = styled( Typography )( () => ( {
+	color: palette.grey
+} ) )
