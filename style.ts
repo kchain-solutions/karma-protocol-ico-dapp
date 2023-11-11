@@ -16,3 +16,17 @@ export const theme = createTheme( {
 		},
 	},
 } )
+
+export const formBoxStyle = {
+	display: 'flex',
+	flexGrow: 6,
+	flexDirection: 'column',
+	alignItems: 'center',
+	marginTop: 1
+}
+
+export const formFieldStyle = {
+	width: '40%',
+	marginTop: 1,
+	marginBottom: 1
+}
