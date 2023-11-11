@@ -1,10 +1,11 @@
 import React from 'react'
 import { Box, Typography, Link, Paper, Grid } from '@mui/material'
+import { palette } from 'style'
 
 const Footer = () => {
 	return ( <>
 		<Paper elevation={3}>
-			<Box component="footer" sx={{ backgroundColor: 'primary.main', color: 'white', mt: 8, py: 3, minHeight: 150, paddingTop: 2, paddingLeft: 15, paddingRight: 15, paddingBottom: 2 }}>
+			<Box component="footer" sx={{ backgroundColor: palette.purple, color: 'white', mt: 8, py: 3, minHeight: 150, paddingTop: 2, paddingLeft: 15, paddingRight: 15, paddingBottom: 2 }}>
 
 				<Grid container spacing={2}>
 					<Grid item sm={4}>

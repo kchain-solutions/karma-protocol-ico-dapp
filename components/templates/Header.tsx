@@ -14,7 +14,7 @@ const Header = () => {
 			<Paper elevation={3} sx={{}}>
 				<Box sx={{ flexGrow: 1 }}>
 					<AppBar position="static">
-						<Toolbar sx={{ display: 'flex', justifyContent: 'space-between',backgroundColor: palette.purple }}>
+						<Toolbar sx={{ display: 'flex', justifyContent: 'space-between', backgroundColor: palette.purple }}>
 							<Box display="flex" alignItems="center">
 								<Box sx={{ width: 50, height: 50, marginRight: 2 }}>
 									<img
