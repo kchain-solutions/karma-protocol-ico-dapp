@@ -12,7 +12,7 @@ const TransactionsList: React.FC<ComponentProps> = ( {txs} ) => {
 
 	return (
 		<>
-			<Paper elevation={9} sx={{backgroundColor: palette.pink, padding: '10px'}}>
+			<Paper elevation={9} sx={{backgroundColor: palette.pink, mt:3, padding: '10px'}}>
 				<Typography variant="h5" color={'whitesmoke'} gutterBottom>
                     LAST PURCHASE TRANSACTIONS
 				</Typography>

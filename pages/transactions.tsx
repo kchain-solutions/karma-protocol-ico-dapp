@@ -26,7 +26,7 @@ const Index = () => {
 	return (
 		<>
 			<Header />
-			<Ico availableGldkrmAmount = {data.available_gldkrm_amount}/>
+			<TransactionsList txs={data.txs} />
 			<Footer />
 		</>
 	)

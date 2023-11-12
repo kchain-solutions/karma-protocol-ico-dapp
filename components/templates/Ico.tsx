@@ -6,17 +6,13 @@ import { BodyText, TitleText } from 'components/atoms/Text'
 import { PurplePaper } from 'components/atoms/Container'
 import PaymentIcon from '@mui/icons-material/Payment'
 import CloseIcon from '@mui/icons-material/Close'
-import LockOpenIcon from '@mui/icons-material/LockOpen'
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
-import HourglassBottomIcon from '@mui/icons-material/HourglassBottom'
 import Image from 'next/image'
 
 import icoAbi from '../../abis/ICO.json'
 import gldkrmAbi from '../../abis/GLDKRM.json'
 import gldkrm_ico from '../../contents/gldkrm_ico.json'
-import { formFieldStyle, palette } from 'style'
+import { palette } from 'style'
 import { GradientButton } from 'components/atoms/Buttons'
-import { pink } from '@mui/material/colors'
 
 const STABLECOIN_OPTIONS = [{currency: 'USDC', address: process.env.NEXT_PUBLIC_USDC_ADDRESS}, {currency: 'USDT', address:process.env.NEXT_PUBLIC_USDT_ADDRESS}]
 const RATE = Number( process.env.NEXT_PUBLIC_STABLECOIN_GLDKRM_CON_RATE )
@@ -29,9 +25,12 @@ const Ico: React.FC<ComponentProps> = ( {availableGldkrmAmount} ) => {
 
 	const { isActive, account, provider,   } = useWeb3React()
 
+	const [isAdmin, setIsAdmin] = useState<boolean>( false )
+
 	const [stableCoinOption, setStableCoinOption] = useState<string>( STABLECOIN_OPTIONS[0].currency )
 	const [stableCoinAddress, setStableCoinAddress] = useState<string>( STABLECOIN_OPTIONS[0].address )
-	const [stableCoinBalance, setstableCoinBalance] = useState<string> ( '' )
+	const [stableCoinBalance, setStableCoinBalance] = useState<string> ( '' )
+	const [stableCoinContractBalance, setStableCoinContractBalance] = useState<string> ( '' )
 	const [stableCoinInvestAmount, setStableCoinInvestAmount] = useState<string> ( '' )
 	const [gldkrmBuyingAmount, setGldKrmBuyingAmount] = useState<string>( '' )
 	const [gldkrmUserBalance, setGldkrmUserBalance] = useState<string>( '0' )
@@ -46,9 +45,6 @@ const Ico: React.FC<ComponentProps> = ( {availableGldkrmAmount} ) => {
 	const [isOpenSnackbar, setIsOpenSnackbar] = useState( false )
 	const [snackbarMessage, setSnackbarMessage] = useState( '' )
 
-	const [isApproved, setIsApproved] = useState( false )
-	const [isPending, setIsPending] = useState( false )
-	const [isToBeProcessed, setIsToBeProcessed] = useState( true )
 	
 	const loadBalances = ( ) => {
 		if ( gldkrmContract ) {
@@ -61,8 +57,20 @@ const Ico: React.FC<ComponentProps> = ( {availableGldkrmAmount} ) => {
 		}
 		if( stableCoinContract ){
 			stableCoinContract.balanceOf( account ).then( ( balance:BigNumber ) => {
-				setstableCoinBalance( ethers.utils.formatUnits( balance, 'ether' ) )
+				setStableCoinBalance( ethers.utils.formatUnits( balance, 'ether' ) )
 			} )
+
+			stableCoinContract.balanceOf( process.env.NEXT_PUBLIC_ICO_ADDRESS ).then( ( balance:BigNumber ) => {
+				setStableCoinContractBalance( ethers.utils.formatUnits( balance, 'ether' ) )
+			} )
+		}
+	}
+
+
+	const updateIsAdmin = async () => {
+		if( icoContract ){
+			const res: boolean = await icoContract.admins( account )
+			setIsAdmin( res )
 		}
 	}
 
@@ -97,6 +105,11 @@ const Ico: React.FC<ComponentProps> = ( {availableGldkrmAmount} ) => {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	} , [stableCoinContract, gldkrmContract] )
 
+	useEffect( ( ) => {
+		updateIsAdmin()
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [icoContract] )
+
 
 	const checkInvestErrors = () => {
 		return ( ( Number( stableCoinInvestAmount ) >  Number( stableCoinBalance )  ) 
@@ -130,6 +143,27 @@ const Ico: React.FC<ComponentProps> = ( {availableGldkrmAmount} ) => {
 				setSnackbarMessage( `TX rejected: ${error.message}` )
 				setIsOpenSnackbar( true )
 			}
+		}
+	}
+
+	const handleWithdrawal = async () => {
+		setSnackbarMessage( `Processing withdrawal request ${stableCoinContractBalance} ${stableCoinOption}. Please wait...` )
+		setIsOpenSnackbar( true )
+	
+		try {
+
+			//Withdrawal transaction
+			const txBuyResponse = await icoContract.withdrawal( ethers.utils.parseUnits( stableCoinContractBalance, 18 ), stableCoinAddress )
+			const txBuyReceipt = await txBuyResponse.wait()
+			setSnackbarMessage( `Withdrawal transaction succeeded. TX Hash: ${txBuyReceipt.hash}. Please wait...` )
+			setIsOpenSnackbar( true )
+				
+			loadBalances()
+
+		} catch ( error ) {
+			console.error( 'TX rejected:', error )
+			setSnackbarMessage( `TX rejected: ${error.message}` )
+			setIsOpenSnackbar( true )
 		}
 	}
 
@@ -178,9 +212,9 @@ const Ico: React.FC<ComponentProps> = ( {availableGldkrmAmount} ) => {
 	const loadingComponents = () => {
 		if( isActive ){
 			return( <>
-				<PurplePaper elevation={3} sx={{ padding: 2, marginBottom: 2 }}>
-					<Box>
-						<Typography variant='h4'  color={palette.purple_light} sx={{ marginBottom: 2 }}>
+				<Box sx={{mt:3}}>
+					<Paper elevation={9} sx={{ padding: 2, backgroundColor: palette.purple, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+						<Typography variant='h4'  color={palette.yellow} sx={{ marginBottom: 2 }}>
                     		INVEST IN GOLD KARMA
 						</Typography>
 						{Boolean( process.env.NEXT_PUBLIC_IS_TEST ) ? (
@@ -190,11 +224,11 @@ const Ico: React.FC<ComponentProps> = ( {availableGldkrmAmount} ) => {
 						) : null}
 
 						<Typography variant="h6" color={palette.yellow} gutterBottom>
-                    		Available Gold Karma supply: {availableGldkrmAmount} GLDKRM
+							Available supply: {availableGldkrmAmount} GLDKRM
 						</Typography>
 
 						<Typography variant="h6" color={palette.cyano} gutterBottom>
-                    		Your Gold Karma balance: {gldkrmUserBalance} GLDKRM
+                    		Your balance: {gldkrmUserBalance} GLDKRM
 						</Typography>
 						
 						<Box width={'60%'}>
@@ -255,11 +289,20 @@ const Ico: React.FC<ComponentProps> = ( {availableGldkrmAmount} ) => {
 								<PaymentIcon sx={{ marginRight: 1 }} />
                     		Receive {gldkrmBuyingAmount} GLDKRM
 							</GradientButton>
+							{isAdmin ? <GradientButton
+								variant="contained"
+								color="primary"
+								fullWidth
+								sx={{ marginY: 2 }}
+								onClick={handleWithdrawal}
+							>
+								<PaymentIcon sx={{ marginRight: 1 }} />
+                    		Withdraw {stableCoinContractBalance} {stableCoinOption}
+							</GradientButton> : ''}
+							
 						</Box>
-					</Box>
-				</PurplePaper>
-
-
+					</Paper>
+				</Box>
 				<Snackbar
 					open={isOpenSnackbar}
 					onClose={handleClose}
@@ -286,13 +329,15 @@ const Ico: React.FC<ComponentProps> = ( {availableGldkrmAmount} ) => {
 	const PleaseConnect = () => {
 		return (
 			<> 
-				<PurplePaper>
-					<TitleText variant='h5' color={'whitesmoke'}> {gldkrm_ico.title_not_connected.toUpperCase()} </TitleText>
-					<Typography variant="h6" color={'whitesmoke'} gutterBottom>
-                    		Remaining Gold Karma supply: {availableGldkrmAmount}
-					</Typography>
-					<BodyText variant='body2' color={'whitesmoke'}> {gldkrm_ico.project_description} </BodyText>
-				</ PurplePaper> 
+				<Box sx={{mt:3}}>
+					<Paper elevation={9} sx={{ padding: 2, backgroundColor: palette.purple, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+						<TitleText variant='h5' color={'whitesmoke'}> {gldkrm_ico.title_not_connected.toUpperCase()} </TitleText>
+						<Typography variant="h6" color={'whitesmoke'} gutterBottom>
+                    		Available Gold Karma supply: {availableGldkrmAmount} GLDKRM
+						</Typography>
+						<BodyText variant='body2' color={'whitesmoke'}> {gldkrm_ico.project_description} </BodyText>
+					</ Paper> 
+				</Box>
 			</> )
 	}
 

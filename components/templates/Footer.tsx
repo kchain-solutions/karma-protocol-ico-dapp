@@ -5,11 +5,9 @@ import { palette } from 'style'
 const Footer = () => {
 	return ( <>
 		<Paper elevation={3}>
-			<Box component="footer" sx={{ backgroundColor: palette.purple, color: 'white', mt: 8, py: 3, minHeight: 150, paddingTop: 2, paddingLeft: 15, paddingRight: 15, paddingBottom: 2 }}>
-
+			<Box component="footer" sx={{ backgroundColor: palette.purple, color: 'white', mt: 3, py: 3, minHeight: 150, paddingTop: 2, paddingLeft: 15, paddingRight: 15, paddingBottom: 2 }}>
 				<Grid container spacing={2}>
 					<Grid item sm={4}>
-						<Typography variant='h6'> MISSION</Typography>
 						<Typography variant="body1"> "... Unlock Goodness, Earn Karma..." </Typography>
 					</Grid>
 					<Grid item sm={8}>

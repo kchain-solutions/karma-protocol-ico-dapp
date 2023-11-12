@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react'
 import ConnectButton from 'components/organisms/ConnectButton'
-import { AppBar, Box, Paper, Toolbar, Typography } from '@mui/material'
+import { AppBar, Box, Paper, Toolbar, Typography, Link } from '@mui/material'
 import { palette } from 'style'
 import Image from 'next/image'
 
@@ -9,9 +9,8 @@ import Image from 'next/image'
 const Header = () => {
 
 	return(
-
 		<>
-			<Paper elevation={3} sx={{}}>
+			<Paper sx={{backgroundColor: palette.purple}}>
 				<Box sx={{ flexGrow: 1 }}>
 					<AppBar position="static">
 						<Toolbar sx={{ display: 'flex', justifyContent: 'space-between', backgroundColor: palette.purple }}>
@@ -23,22 +22,39 @@ const Header = () => {
 										style={{ width: '100%', height: '100%' }}
 									/>
 								</Box>
-								<Typography variant="h4" sx={{ color: 'white' }}>
-                            		KARMA PROTOCOL
-								</Typography>
+								<Link href="/" underline="none">
+									<Typography variant="h4" sx={{ color: 'whitesmoke' }}>
+                                KARMA PROTOCOL
+									</Typography>
+								</Link>
 							</Box>
+							<Link href="/" underline="hover" sx={{ color: 'white', marginRight: '1', '&:hover': { color: palette.pink } }}>
+								<Typography variant="h6">
+                            Home
+								</Typography>
+							</Link>
+							<Link href="/transactions" underline="hover" sx={{ color: 'white',marginRight: '1', '&:hover': { color: palette.pink } }}>
+								<Typography variant="h6">
+                            Transactions
+								</Typography>
+							</Link>
+							<Link href="/transactions" underline="hover" sx={{ color: 'white', marginRight: '1', '&:hover': { color: palette.pink } }}>
+								<Typography variant="h6">
+                            Whitepaper
+								</Typography>
+							</Link>
 							<ConnectButton />
 						</Toolbar>
 					</AppBar>
 				</Box>
+				<img
+					src='/banner.png'
+					alt="Earnkarma logo"
+					style={{ width: '100%', height: '100%' }}
+				/>
 			</Paper>
-			<img
-				src='/banner.png'
-				alt="Earnkarma logo"
-				style={{ width: '100%', height: '100%' }}
-			/>
-		</>
 
+		</>
 	)
 }
 
