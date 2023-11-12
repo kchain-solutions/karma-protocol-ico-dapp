@@ -1,9 +1,10 @@
-interface TransactionResponse  {
-    available_gldkrm_amount: string
-    txs: Tx[];
+export interface TransactionResponse  {
+    available_gldkrm_amount: string,
+    txs: Tx[],
+    is_cached: boolean
 };
 
-interface Tx {
+export interface Tx {
     type: string,
     stable_amount: string,
     gldkrm_amount: string,

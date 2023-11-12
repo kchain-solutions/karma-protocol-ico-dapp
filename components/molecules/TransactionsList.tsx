@@ -12,8 +12,8 @@ const TransactionsList: React.FC<ComponentProps> = ( {txs} ) => {
 
 	return (
 		<>
-			<Paper elevation={9} sx={{backgroundColor: palette.pink, mt:3, padding: '10px'}}>
-				<Typography variant="h5" color={'whitesmoke'} gutterBottom>
+			<Paper elevation={9} sx={{ mt:3, padding: '10px', backgroundColor: palette.purple, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+				<Typography variant="h5" color={palette.cyano} gutterBottom>
                     LAST PURCHASE TRANSACTIONS
 				</Typography>
 				<List>
@@ -22,12 +22,12 @@ const TransactionsList: React.FC<ComponentProps> = ( {txs} ) => {
 							{index > 0 && <Divider />}
 							<ListItem>
 								<Card variant="outlined">
-									<CardContent sx={{minWidth:'350px'}}>
+									<CardContent sx={{minWidth:'370px'}}>
 										<Typography variant="body2">GLDKRM purchased amount: {tx.gldkrm_amount}</Typography>
 										<Typography variant="body2">
-                                            Transaction link: 
+                                            Transaction hash: 
 											<Link href={` ${process.env.NEXT_PUBLIC_TX_SCANNER}${tx.tx_hash}`} target="_blank" rel="noopener noreferrer">
-												{ellipsis( tx.tx_hash, 7, 5 )}
+												{` ${ellipsis( tx.tx_hash, 16, 14 )}`}
 											</Link>
 										</Typography>
 

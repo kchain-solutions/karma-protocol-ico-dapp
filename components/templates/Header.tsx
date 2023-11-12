@@ -38,7 +38,7 @@ const Header = () => {
                             Transactions
 								</Typography>
 							</Link>
-							<Link href="/transactions" underline="hover" sx={{ color: 'white', marginRight: '1', '&:hover': { color: palette.pink } }}>
+							<Link href="https://medium.com/@kchainsolutions/karma-protocol-whitepaper-96dcbd4a9cfb" target="_blank" underline="hover" sx={{ color: 'white', marginRight: '1', '&:hover': { color: palette.pink } }}>
 								<Typography variant="h6">
                             Whitepaper
 								</Typography>
