@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, useMemo } from 'react'
+import React, { useEffect, useState, useContext, useMemo, ComponentProps } from 'react'
 import { ethers, BigNumber, Contract } from 'ethers'
 import { useWeb3React } from '@web3-react/core'
 import { Paper, Box, TextField, InputAdornment, IconButton, Typography, Button, Snackbar, Link, Divider, FormControl, Select, MenuItem } from '@mui/material'
@@ -9,18 +9,23 @@ import CloseIcon from '@mui/icons-material/Close'
 import LockOpenIcon from '@mui/icons-material/LockOpen'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 import HourglassBottomIcon from '@mui/icons-material/HourglassBottom'
+import Image from 'next/image'
 
 import icoAbi from '../../abis/ICO.json'
 import gldkrmAbi from '../../abis/GLDKRM.json'
 import gldkrm_ico from '../../contents/gldkrm_ico.json'
-import { formFieldStyle } from 'style'
+import { formFieldStyle, palette } from 'style'
 import { GradientButton } from 'components/atoms/Buttons'
+import { pink } from '@mui/material/colors'
 
 const STABLECOIN_OPTIONS = [{currency: 'USDC', address: process.env.NEXT_PUBLIC_USDC_ADDRESS}, {currency: 'USDT', address:process.env.NEXT_PUBLIC_USDT_ADDRESS}]
 const RATE = Number( process.env.NEXT_PUBLIC_STABLECOIN_GLDKRM_CON_RATE )
 
+interface ComponentProps {
+	availableGldkrmAmount: string
+}
 
-const Ico = () => {
+const Ico: React.FC<ComponentProps> = ( {availableGldkrmAmount} ) => {
 
 	const { isActive, account, provider,   } = useWeb3React()
 
@@ -31,7 +36,6 @@ const Ico = () => {
 	const [gldkrmBuyingAmount, setGldKrmBuyingAmount] = useState<string>( '' )
 	const [gldkrmUserBalance, setGldkrmUserBalance] = useState<string>( '0' )
 	const [gldkrmContractBalance, setGldkrmContractBalance] = useState<string>( '0' )
-	const [toastMessage, setToastMessage] = useState<string>( '' )
 	const [icoContract, setIcoContract] = useState<ethers.Contract | undefined>()
 	const [stableCoinContract, setStableCoinContract] = useState<ethers.Contract | undefined>() 
 	const [gldkrmContract, setGldkrmContract] = useState<ethers.Contract | undefined>() 
@@ -67,11 +71,6 @@ const Ico = () => {
 			return provider.getSigner()
 		}
 		else return provider
-	} 
-
-	const roundNumber = ( number: string ): string => {
-		const n = Number( number )
-		return n.toFixed( 6 )
 	} 
 
 
@@ -112,16 +111,23 @@ const Ico = () => {
 	
 			try {
 				//Approve transaction request
-				const txResponse = await stableCoinContract.approve( process.env.NEXT_PUBLIC_ICO_ADDRESS, ethers.utils.parseUnits( stableCoinInvestAmount, 18 ) )
-	
-				const txReceipt = await txResponse.wait()
-				console.log( 'Transaction receipt', txReceipt )
-	
-				setSnackbarMessage( `Approving transaction succeeded. TX Hash: ${txResponse.hash}` )
+				const txStableCoinResponse = await stableCoinContract.approve( process.env.NEXT_PUBLIC_ICO_ADDRESS, ethers.utils.parseUnits( stableCoinInvestAmount, 18 ) )
+				await txStableCoinResponse.wait()
+				setSnackbarMessage( `Approving transaction succeeded. Buying ${gldkrmBuyingAmount} GLDKRM. Please wait...` )
 				setIsOpenSnackbar( true )
+
+				//Buy transaction
+				const txBuyResponse = await icoContract.buy( ethers.utils.parseUnits( stableCoinInvestAmount, 18 ), stableCoinAddress )
+				const txBuyReceipt = await txBuyResponse.wait()
+				setSnackbarMessage( `Buying transaction succeeded. TX Hash: ${txBuyReceipt.hash}. Please wait...` )
+				setIsOpenSnackbar( true )
+				
+				setStableCoinInvestAmount( '0' )
+				loadBalances()
+
 			} catch ( error ) {
-				console.error( 'Approval failed', error )
-				setSnackbarMessage( `Approval failed: ${error.message}` )
+				console.error( 'TX rejected:', error )
+				setSnackbarMessage( `TX rejected: ${error.message}` )
 				setIsOpenSnackbar( true )
 			}
 		}
@@ -172,76 +178,103 @@ const Ico = () => {
 	const loadingComponents = () => {
 		if( isActive ){
 			return( <>
-				<Paper elevation={3} sx={{ padding: 2, marginBottom: 2 }}>
+				<PurplePaper elevation={3} sx={{ padding: 2, marginBottom: 2 }}>
 					<Box>
-						<Typography variant='h4' sx={{ marginBottom: 2, color: 'primary.main' }}>
+						<Typography variant='h4'  color={palette.purple_light} sx={{ marginBottom: 2 }}>
                     		INVEST IN GOLD KARMA
 						</Typography>
 						{Boolean( process.env.NEXT_PUBLIC_IS_TEST ) ? (
-							<Typography variant='body1' sx={{ marginBottom: 2 }}>
+							<Typography variant='body1' color={palette.yellow} sx={{ marginBottom: 2 }}>
                         		ONLY FOR TEST
 							</Typography>
 						) : null}
 
-						<TextField
-							label={'Investing Amount'}
-							value={stableCoinInvestAmount}
-							type="number"
-							onChange={handleInvestAmountChange}
-							error={Boolean( stableCoinError )}
-							helperText={stableCoinHelperText}
-							margin="normal"
-							sx={formFieldStyle}
-							InputProps={{
-								endAdornment: (
-									<InputAdornment position="end">
-										<IconButton
-											size="small"
-											onClick={() => setStableCoinInvestAmount( stableCoinBalance )}
-											title="Use max"
-										>
-											<Typography variant="caption">{stableCoinBalance} MAX</Typography>
-										</IconButton>
-										<FormControl sx={{ m: 1, minWidth: 120 }}>
-											<Select
-												value={stableCoinOption}
-												onChange={handleStableCoinOptionChange}
-												displayEmpty
-												inputProps={{ 'aria-label': 'Select stablecoin' }}
-												size="small"
-											>
-												{STABLECOIN_OPTIONS.map( ( option ) => (
-													<MenuItem key={option.currency} value={option.currency}>
-														{option.currency}
-													</MenuItem>
-												) )}
-											</Select>
-										</FormControl>
-									</InputAdornment>
-								),
-							}}
-						/>
+						<Typography variant="h6" color={palette.yellow} gutterBottom>
+                    		Available Gold Karma supply: {availableGldkrmAmount} GLDKRM
+						</Typography>
 
-						<GradientButton
-							variant="contained"
-							color="primary"
-							sx={{ marginY: 2 }}
-							onClick={handleBuy}
-							disabled={checkInvestErrors()}
-						>
-							<PaymentIcon sx={{ marginRight: 1 }} />
+						<Typography variant="h6" color={palette.cyano} gutterBottom>
+                    		Your Gold Karma balance: {gldkrmUserBalance} GLDKRM
+						</Typography>
+						
+						<Box width={'60%'}>
+							<TextField
+								label={'Investing Amount'}
+								value={stableCoinInvestAmount}
+								type="number"
+								onChange={handleInvestAmountChange}
+								error={Boolean( stableCoinError )}
+								helperText={stableCoinHelperText}
+								fullWidth
+								margin="normal"
+								sx={{ backgroundColor: palette.purple_light, input: { color: 'whitesmoke' }, label: { color: 'whitesmoke' }  }}
+								InputProps={{
+									endAdornment: (
+										<InputAdornment position="end">
+											<IconButton
+												size="small"
+												onClick={() => setStableCoinInvestAmount( stableCoinBalance )}
+												title="Use max"
+											>
+												<Typography color='whitesmoke' variant="caption">{stableCoinBalance} MAX</Typography>
+											</IconButton>
+											<FormControl sx={{ m: 1, minWidth: 120 }}>
+												<Select
+													value={stableCoinOption}
+													onChange={handleStableCoinOptionChange}
+													displayEmpty
+													inputProps={{ 'aria-label': 'Select stablecoin' }}
+													size="small"
+													sx={{color:'whitesmoke', backgroundColor: palette.purple}}
+												>
+													{STABLECOIN_OPTIONS.map( ( option ) => (
+														<MenuItem key={option.currency} value={option.currency}>
+															<Box sx={{ display: 'flex', alignItems: 'center' }}>
+																{ option.currency === 'USDC' ? 
+																	<img src={'/usdc.png'} alt="" style={{ width: 24, height: 24, marginRight: '8px' }} /> 
+																	: <img src={'/tether.png'} alt="" style={{ width: 24, height: 24, marginRight: '8px' }} /> }
+														 {option.currency} 
+														 </Box>
+														</MenuItem>
+													) )}
+												</Select>
+											</FormControl>
+										</InputAdornment>
+									),
+								}}
+							/>
+
+							<GradientButton
+								variant="contained"
+								color="primary"
+								fullWidth
+								sx={{ marginY: 2 }}
+								onClick={handleBuy}
+								disabled={checkInvestErrors()}
+							>
+								<PaymentIcon sx={{ marginRight: 1 }} />
                     		Receive {gldkrmBuyingAmount} GLDKRM
-						</GradientButton>
+							</GradientButton>
+						</Box>
 					</Box>
-				</Paper>
+				</PurplePaper>
 
 
 				<Snackbar
 					open={isOpenSnackbar}
 					onClose={handleClose}
-					autoHideDuration={30000}
+					autoHideDuration={60000}
 					message={snackbarMessage}
-					action={''}
+					action={<React.Fragment>
+						<IconButton
+						  size="small"
+						  aria-label="close"
+						  color="inherit"
+						  onClick={handleClose}
+						>
+						  <CloseIcon fontSize="small" />
+						</IconButton>
+					  </React.Fragment>}
 				/>
 			</> )
 		}
@@ -254,8 +287,11 @@ const Ico = () => {
 		return (
 			<> 
 				<PurplePaper>
-					<TitleText variant='h5'> {gldkrm_ico.title_not_connected.toUpperCase()} </TitleText>
-					<BodyText variant='body2'> {gldkrm_ico.project_description} </BodyText>
+					<TitleText variant='h5' color={'whitesmoke'}> {gldkrm_ico.title_not_connected.toUpperCase()} </TitleText>
+					<Typography variant="h6" color={'whitesmoke'} gutterBottom>
+                    		Remaining Gold Karma supply: {availableGldkrmAmount}
+					</Typography>
+					<BodyText variant='body2' color={'whitesmoke'}> {gldkrm_ico.project_description} </BodyText>
 				</ PurplePaper> 
 			</> )
 	}

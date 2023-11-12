@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Popover, Typography } from '@mui/material'
+import { Box, Popover } from '@mui/material'
 import { useWeb3React } from '@web3-react/core'
 import Web3ConnectionOptions from 'components/molecules/Web3ConnectionOptions'
 import { ConnectionType, getConnection, tryActivateConnector } from 'utils/connections'
 import { StandardButton } from 'components/atoms/Buttons'
-import { ellipsis, isParsableToNumber } from 'utils/parsing'
+import { ellipsis } from 'utils/parsing'
 
 
 const ConnectButton = () => {
