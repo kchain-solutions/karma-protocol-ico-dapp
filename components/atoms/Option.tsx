@@ -2,11 +2,10 @@
 import React, {useState, useEffect} from 'react'
 import { Box } from '@mui/material'
 import { GradientButton } from './Buttons'
-import Image from 'next/image'
 
 import { ConnectionType, getConnection, tryActivateConnector, tryDeactivateConnector } from '../../utils/connections'
 
-const Web3Option = ( {
+const Option = ( {
 	isEnabled,
 	isConnected,
 	connectionType,
@@ -71,4 +70,4 @@ const Web3Option = ( {
 	)
 }
 
-export default Web3Option
+export default Option
