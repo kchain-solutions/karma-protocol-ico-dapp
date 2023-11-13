@@ -27,7 +27,7 @@ const TransactionsList: React.FC<ComponentProps> = ( {txs} ) => {
 										<Typography color='whitesmoke' variant="body2">GLDKRM purchased amount: {tx.gldkrm_amount}</Typography>
 										<Typography color='whitesmoke' variant="body2">
                                             Transaction hash: 
-											<Link href={` ${process.env.NEXT_PUBLIC_TX_SCANNER}${tx.tx_hash}`} target="_blank" rel="noopener noreferrer">
+											<Link href={` ${process.env.NEXT_PUBLIC_TX_SCANNER}tx/${tx.tx_hash}`} target="_blank" rel="noopener noreferrer">
 												{` ${ellipsis( tx.tx_hash, 16, 14 )}`}
 											</Link>
 										</Typography>
