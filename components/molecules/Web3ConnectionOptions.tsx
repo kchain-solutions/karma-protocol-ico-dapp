@@ -4,7 +4,7 @@ import { ConnectionType, getHasMetaMaskExtensionInstalled } from '../../utils/co
 import { METAMASK_URL } from '../../utils/constants'
 import { Box, Paper } from '@mui/material'
 import { palette } from 'style'
-import Web3Option from 'components/atoms/Web3Option'
+import Web3Option from '../atoms/Web3Option'
 
 type ConnectOptionsParams = {
   activeConnectionType: ConnectionType | null
