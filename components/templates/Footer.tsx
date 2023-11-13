@@ -8,7 +8,7 @@ const Footer = () => {
 			<Box component="footer" sx={{ backgroundColor: palette.purple, color: 'white', mt: 3, py: 3, minHeight: 150, paddingTop: 2, paddingLeft: 15, paddingRight: 15, paddingBottom: 2 }}>
 				<Grid container spacing={2}>
 					<Grid item sm={4} >
-						<Typography variant="body1" color={palette.cyano} sx={{mt:2}}> "... Unlock Goodness, Earn Karma..." </Typography>
+						<Typography variant="body1" color={palette.cyano} sx={{mt:2}}> {'"... Unlock Goodness, Earn Karma..."'} </Typography>
 					</Grid>
 					<Grid item sm={8}>
 						<Box textAlign="right" pt={1}>

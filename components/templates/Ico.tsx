@@ -166,7 +166,7 @@ const Ico: React.FC<ComponentProps> = ( {availableGldkrmAmount} ) => {
 		}
 	}
 
-	const handleClose = ( _event: any, reason: any ) => {
+	const handleClose = ( event?: React.SyntheticEvent | Event, reason?: string ) => {
 		if ( reason === 'clickaway' ) {
 			return
 		}
@@ -223,7 +223,7 @@ const Ico: React.FC<ComponentProps> = ( {availableGldkrmAmount} ) => {
 						) : null}
 
 						<Typography variant="h6" color={palette.cyano} gutterBottom>
-                    		Your balance: {gldkrmUserBalance} GLDKRM
+                    		YOUR BALANCE: {gldkrmUserBalance} GLDKRM
 						</Typography>
 						
 						<Box width={'60%'}>
