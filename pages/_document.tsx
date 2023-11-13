@@ -10,6 +10,7 @@ class MyDocument extends Document {
 		return (
 			<Html lang="en">
 				<Head>
+					<link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
 					<style>{`
             body {
               background-color: #5d56a3;

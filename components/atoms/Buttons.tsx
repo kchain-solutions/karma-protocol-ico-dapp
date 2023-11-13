@@ -23,6 +23,8 @@ export const StandardButton = styled( Button )( () => ( {
 	padding: '5px',
 	marginTop: '5px',
 	marginBottom:'5px',
+	minWidth: '125px',
+	height: '40px',
 	'&:hover':{
 		background: palette.cyano, 
 		backgroundImage: 'none', 
