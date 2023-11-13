@@ -12,8 +12,11 @@ export const palette = {
 export const theme = createTheme( {
 	palette: {
 		background: {
-			default: palette.purple_light,  // Replace with your desired color or gradient
+			default: palette.purple_light,
 		},
+		primary: {
+			main: palette.yellow
+		}
 	},
 } )
 

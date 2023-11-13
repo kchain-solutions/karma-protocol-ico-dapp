@@ -1,9 +1,8 @@
-import React, { useEffect, useState, useContext, useMemo, ComponentProps } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ethers, BigNumber, Contract } from 'ethers'
 import { useWeb3React } from '@web3-react/core'
 import { Paper, Box, TextField, InputAdornment, IconButton, Typography, Button, Snackbar, Link, Divider, FormControl, Select, MenuItem } from '@mui/material'
 import { BodyText, TitleText } from 'components/atoms/Text'
-import { PurplePaper } from 'components/atoms/Container'
 import PaymentIcon from '@mui/icons-material/Payment'
 import CloseIcon from '@mui/icons-material/Close'
 import Image from 'next/image'
@@ -119,20 +118,20 @@ const Ico: React.FC<ComponentProps> = ( {availableGldkrmAmount} ) => {
 
 	const handleBuy = async () => {
 		if ( !stableCoinError ) {
-			setSnackbarMessage( `Approving ${process.env.NEXT_PUBLIC_ICO_ADDRESS} to spend ${stableCoinInvestAmount} ${stableCoinOption}. Please wait...` )
+			setSnackbarMessage( `Please remain online for the upcoming purchase authorization.\nCurrently authorizing the contract at ${process.env.NEXT_PUBLIC_ICO_ADDRESS} to use ${stableCoinInvestAmount} ${stableCoinOption} on your behalf.` )
 			setIsOpenSnackbar( true )
 	
 			try {
 				//Approve transaction request
 				const txStableCoinResponse = await stableCoinContract.approve( process.env.NEXT_PUBLIC_ICO_ADDRESS, ethers.utils.parseUnits( stableCoinInvestAmount, 18 ) )
 				await txStableCoinResponse.wait()
-				setSnackbarMessage( `Approving transaction succeeded. Buying ${gldkrmBuyingAmount} GLDKRM. Please wait...` )
+				setSnackbarMessage( `Authorization successful.\nInitiating the purchase of ${gldkrmBuyingAmount} GLDKRM. Please wait...` )
 				setIsOpenSnackbar( true )
 
 				//Buy transaction
 				const txBuyResponse = await icoContract.buy( ethers.utils.parseUnits( stableCoinInvestAmount, 18 ), stableCoinAddress )
 				const txBuyReceipt = await txBuyResponse.wait()
-				setSnackbarMessage( `Buying transaction succeeded. TX Hash: ${txBuyReceipt.hash}. Please wait...` )
+				setSnackbarMessage( `Purchase successful. Transaction Hash: ${txBuyReceipt.transactionHash}. Updating balances...` )
 				setIsOpenSnackbar( true )
 				
 				setStableCoinInvestAmount( '0' )
@@ -218,14 +217,10 @@ const Ico: React.FC<ComponentProps> = ( {availableGldkrmAmount} ) => {
                     		INVEST IN GOLD KARMA
 						</Typography>
 						{Boolean( process.env.NEXT_PUBLIC_IS_TEST ) ? (
-							<Typography variant='body1' color={palette.yellow} sx={{ marginBottom: 2 }}>
+							<Typography variant='h5' color={palette.yellow} sx={{ marginBottom: 2 }}>
                         		ONLY FOR TEST
 							</Typography>
 						) : null}
-
-						<Typography variant="h6" color={palette.yellow} gutterBottom>
-							Available supply: {availableGldkrmAmount} GLDKRM
-						</Typography>
 
 						<Typography variant="h6" color={palette.cyano} gutterBottom>
                     		Your balance: {gldkrmUserBalance} GLDKRM
@@ -233,13 +228,14 @@ const Ico: React.FC<ComponentProps> = ( {availableGldkrmAmount} ) => {
 						
 						<Box width={'60%'}>
 							<TextField
-								label={'Investing Amount'}
+								label={'Investment Amount'.toUpperCase()}
 								value={stableCoinInvestAmount}
 								type="number"
 								onChange={handleInvestAmountChange}
 								error={Boolean( stableCoinError )}
 								helperText={stableCoinHelperText}
 								fullWidth
+								color='primary'
 								margin="normal"
 								sx={{ backgroundColor: palette.purple_light, input: { color: 'whitesmoke' }, label: { color: 'whitesmoke' }  }}
 								InputProps={{
@@ -308,12 +304,21 @@ const Ico: React.FC<ComponentProps> = ( {availableGldkrmAmount} ) => {
 					onClose={handleClose}
 					autoHideDuration={60000}
 					message={snackbarMessage}
+					anchorOrigin={{
+						vertical: 'bottom',
+						horizontal: 'left',
+					}}
+					sx={{'& .MuiSnackbarContent-root': {
+						color: 'whitesmoke', 
+						backgroundColor: palette.pink,
+					}}}
 					action={<React.Fragment>
 						<IconButton
 						  size="small"
 						  aria-label="close"
 						  color="inherit"
 						  onClick={handleClose}
+						  sx={{color: palette.yellow}}
 						>
 						  <CloseIcon fontSize="small" />
 						</IconButton>

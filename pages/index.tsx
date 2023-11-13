@@ -3,6 +3,7 @@ import Header from 'components/templates/Header'
 import Ico from 'components/templates/Ico'
 import Footer from 'components/templates/Footer'
 import TransactionsList from 'components/molecules/TransactionsList'
+import AboutKarma from 'components/organisms/AboutKarma'
 
 
 const Index = () => {
@@ -27,6 +28,7 @@ const Index = () => {
 		<>
 			<Header />
 			<Ico availableGldkrmAmount = {data.available_gldkrm_amount}/>
+			<AboutKarma availableGldkrmAmount = {data.available_gldkrm_amount} />
 			<Footer />
 		</>
 	)

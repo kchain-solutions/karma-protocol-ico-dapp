@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 
 import { ConnectionType, getConnection, PRIORITIZED_CONNECTORS } from '../utils/connections'
 import { AppProps } from 'next/app'
-import { Box, ThemeProvider } from '@mui/material'
+import { ThemeProvider } from '@mui/material'
 import { theme } from 'style'
 
 

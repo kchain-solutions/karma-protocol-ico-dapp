@@ -19,7 +19,7 @@ let cache: Cache = {
 	lastFetch: 0
 }
 
-const CACHE_DURATION = 1000 * 10 
+const CACHE_DURATION = 1000 * 20 
 
 export default async function handler(
 	req: NextApiRequest,
@@ -39,7 +39,7 @@ export default async function handler(
 		responseData.available_gldkrm_amount = ethers.utils.formatUnits( contractBalance, 'ether' )
 
 		const latestBlock = await provider.getBlockNumber()
-		const fromBlock = Math.max( 0, latestBlock - 10000000 )
+		const fromBlock = Math.max( 0, latestBlock - 1000000 )
 		const events = await icoContract.queryFilter( 'Bought', fromBlock, latestBlock )
 		const lastTenEvents = events.slice( -15 )
 
