@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { ethers, BigNumber, Contract } from 'ethers'
 import { useWeb3React } from '@web3-react/core'
 import { Paper, Box, TextField, InputAdornment, IconButton, Typography, Button, Snackbar, Link, Divider, FormControl, Select, MenuItem } from '@mui/material'
-import { BodyText, TitleText } from 'components/atoms/Text'
 import PaymentIcon from '@mui/icons-material/Payment'
 import CloseIcon from '@mui/icons-material/Close'
 import Image from 'next/image'
@@ -12,6 +11,7 @@ import gldkrmAbi from '../../abis/GLDKRM.json'
 import gldkrm_ico from '../../contents/gldkrm_ico.json'
 import { palette } from 'style'
 import { GradientButton } from 'components/atoms/Buttons'
+import ConnectButton from 'components/organisms/ConnectButton'
 
 const STABLECOIN_OPTIONS = [{currency: 'USDC', address: process.env.NEXT_PUBLIC_USDC_ADDRESS}, {currency: 'USDT', address:process.env.NEXT_PUBLIC_USDT_ADDRESS}]
 const RATE = Number( process.env.NEXT_PUBLIC_STABLECOIN_GLDKRM_CON_RATE )
@@ -336,11 +336,7 @@ const Ico: React.FC<ComponentProps> = ( {availableGldkrmAmount} ) => {
 			<> 
 				<Box sx={{mt:3}}>
 					<Paper elevation={9} sx={{ padding: 2, backgroundColor: palette.purple, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-						<TitleText variant='h5' color={'whitesmoke'}> {gldkrm_ico.title_not_connected.toUpperCase()} </TitleText>
-						<Typography variant="h6" color={'whitesmoke'} gutterBottom>
-                    		Available Gold Karma supply: {availableGldkrmAmount} GLDKRM
-						</Typography>
-						<BodyText variant='body2' color={'whitesmoke'}> {gldkrm_ico.project_description} </BodyText>
+						<Typography variant='h4' color={palette.pink} sx={{marginBottom: 2}}> {gldkrm_ico.title_not_connected.toUpperCase()} </Typography>
 					</ Paper> 
 				</Box>
 			</> )
