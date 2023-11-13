@@ -2,9 +2,9 @@ import React from 'react'
 
 import { ConnectionType, getHasMetaMaskExtensionInstalled } from '../../utils/connections'
 import { METAMASK_URL } from '../../utils/constants'
-import Web3Option from '../atoms/Web3Option'
 import { Box, Paper } from '@mui/material'
 import { palette } from 'style'
+import Web3Option from 'components/atoms/Web3Option'
 
 type ConnectOptionsParams = {
   activeConnectionType: ConnectionType | null
