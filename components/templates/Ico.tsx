@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from 'react'
 import { ethers, BigNumber, Contract } from 'ethers'
 import { useWeb3React } from '@web3-react/core'

@@ -4,7 +4,7 @@ import { ConnectionType, getHasMetaMaskExtensionInstalled } from '../../utils/co
 import { METAMASK_URL } from '../../utils/constants'
 import { Box, Paper } from '@mui/material'
 import { palette } from 'style'
-import Web3Option from '../atoms/Web3Option'
+import Option from '../atoms/Option'
 
 type ConnectOptionsParams = {
   activeConnectionType: ConnectionType | null
@@ -25,7 +25,7 @@ const Web3ConnectionOptions = ( {
 		const isNoOptionActive = !isActive || ( isActive && activeConnectionType === null )
 
 		const metaMaskOption = hasMetaMaskExtension ? (
-			<Web3Option
+			<Option
 				isEnabled={isNoOptionActive || activeConnectionType === ConnectionType.INJECTED}
 				isConnected={activeConnectionType === ConnectionType.INJECTED}
 				connectionType={ConnectionType.INJECTED}
@@ -39,7 +39,7 @@ const Web3ConnectionOptions = ( {
 		)
 
 		const coinbaseWalletOption = (
-			<Web3Option
+			<Option
 				isEnabled={isNoOptionActive || activeConnectionType === ConnectionType.COINBASE_WALLET}
 				isConnected={activeConnectionType === ConnectionType.COINBASE_WALLET}
 				connectionType={ConnectionType.COINBASE_WALLET}
@@ -49,7 +49,7 @@ const Web3ConnectionOptions = ( {
 		)
 
 		const walletConnectOption = (
-			<Web3Option
+			<Option
 				isEnabled={isNoOptionActive || activeConnectionType === ConnectionType.WALLET_CONNECT}
 				isConnected={activeConnectionType === ConnectionType.WALLET_CONNECT}
 				connectionType={ConnectionType.WALLET_CONNECT}
