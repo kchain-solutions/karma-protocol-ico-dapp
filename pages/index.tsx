@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Header from 'components/templates/Header'
 import Ico from 'components/templates/Ico'
 import Footer from 'components/templates/Footer'
-import TransactionsList from 'components/molecules/TransactionsList'
 import AboutKarma from 'components/organisms/AboutKarma'
+import { Grid } from '@mui/material'
 
 
 const Index = () => {
@@ -26,10 +26,20 @@ const Index = () => {
 
 	return (
 		<>
-			<Header />
-			<Ico availableGldkrmAmount = {data.available_gldkrm_amount}/>
-			<AboutKarma availableGldkrmAmount = {data.available_gldkrm_amount} />
-			<Footer />
+			<Grid container spacing={2}>
+				<Grid item xs={12} sm={12}>
+					<Header />
+				</Grid>
+				<Grid item xs={12} sm={12}>
+					<Ico availableGldkrmAmount={data.available_gldkrm_amount} />
+				</Grid>
+				<Grid item xs={12} sm={12}>
+					<AboutKarma availableGldkrmAmount={data.available_gldkrm_amount} />
+				</Grid>
+				<Grid item xs={12} sm={12}>
+					<Footer />
+				</Grid>
+			</Grid>
 		</>
 	)
     

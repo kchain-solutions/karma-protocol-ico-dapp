@@ -12,7 +12,7 @@ interface ComponentProps {
 const AboutKarma: React.FC<ComponentProps> = ( {availableGldkrmAmount} ) => {
 	return (
 		<>
-			<Paper elevation={9} sx={{ paddingRight: 35, paddingLeft:35, mt: 3, backgroundColor: palette.purple }}>
+			<Paper elevation={9} sx={{ mt: 3, backgroundColor: palette.purple }}>
 				<Box textAlign={'center'} sx={{ p: 2 }}>
 
 					<Typography variant="h4" sx={{ mb: 1, color: palette.pink }}>WHY INVEST IN GOLD KARMA?</Typography>

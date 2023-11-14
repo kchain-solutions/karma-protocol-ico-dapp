@@ -5,6 +5,9 @@ import { AppBar, Box, Paper, Toolbar, Typography, Link } from '@mui/material'
 import { palette } from 'style'
 import Image from 'next/image'
 
+import logo from '../../public/logo.png'
+import banner from '../../public/banner.png'
+
 
 const Header = () => {
 
@@ -15,31 +18,20 @@ const Header = () => {
 					<AppBar position="static">
 						<Toolbar sx={{ display: 'flex', justifyContent: 'space-between', backgroundColor: palette.purple }}>
 							<Box display="flex" alignItems="center">
-								<Box sx={{ width: 50, height: 50, marginRight: 2 }}>
-									<img
-										src='/logo.png'
-										alt="Earnkarma logo"
-										style={{ width: '100%', height: '100%' }}
-									/>
-								</Box>
+								<Image src={logo} alt='logo' style={{ width: '60px', height: 'auto' }}/>
 								<Link href="/" underline="none">
 									<Typography variant="h4" sx={{ color: 'whitesmoke' }}>
                                 KARMA PROTOCOL
 									</Typography>
 								</Link>
 							</Box>
-							<Link href="/" underline="hover" sx={{ color: 'white', marginRight: '1', '&:hover': { color: palette.pink } }}>
-								<Typography variant="h6">
-                            Home
-								</Typography>
-							</Link>
 							<Link href="/transactions" underline="hover" sx={{ color: 'white',marginRight: '1', '&:hover': { color: palette.pink } }}>
-								<Typography variant="h6">
+								<Typography variant="body1">
                             Transactions
 								</Typography>
 							</Link>
 							<Link href="https://medium.com/@kchainsolutions/karma-protocol-whitepaper-96dcbd4a9cfb" target="_blank" underline="hover" sx={{ color: 'white', marginRight: '1', '&:hover': { color: palette.pink } }}>
-								<Typography variant="h6">
+								<Typography variant="body1">
                             Whitepaper
 								</Typography>
 							</Link>
@@ -47,11 +39,7 @@ const Header = () => {
 						</Toolbar>
 					</AppBar>
 				</Box>
-				<img
-					src='/banner.png'
-					alt="Earnkarma logo"
-					style={{ width: '100%', height: '100%' }}
-				/>
+				<Image src={banner} alt='banner' style={{ width: '100%', height: 'auto' }}/> 
 			</Paper>
 
 		</>

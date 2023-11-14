@@ -2,6 +2,7 @@
 import React, {useState, useEffect} from 'react'
 import { Box } from '@mui/material'
 import { GradientButton } from './Buttons'
+import Image from 'next/image'
 
 import { ConnectionType, getConnection, tryActivateConnector, tryDeactivateConnector } from '../../utils/connections'
 
@@ -61,10 +62,10 @@ const Option = ( {
 	return (
 		<Box>
 			<GradientButton onClick={onClick} disabled={!isEnabled} sx={{ justifyContent: 'flex-start' }}>
-		  <img src={buttonIcon} alt="" style={{ width: 32, height: 32, marginRight: '8px' }} />
-		  <Box component="span" sx={{ flexGrow: 1, textAlign: 'left' }}>
+				<Image src={buttonIcon} alt={''} style={{ width: 32, height: 32, marginRight: '8px' }} />
+		  		<Box component="span" sx={{ flexGrow: 1, textAlign: 'left' }}>
 					{`${isConnected ? 'Disconnect' : 'Connect'} ${buttonLabel}`}
-		  </Box>
+		  		</Box>
 			</GradientButton>
 	  </Box>
 	)
