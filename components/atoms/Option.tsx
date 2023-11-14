@@ -4,6 +4,10 @@ import { Box } from '@mui/material'
 import { GradientButton } from './Buttons'
 import Image from 'next/image'
 
+import metamaskIcon from '../../public/metamask_icon.svg'
+import coinbaseIcon from '../../public/coinbase_icon.png'
+import wallectConnectIcon from '../../public/wallet_connect_icon.png'
+
 import { ConnectionType, getConnection, tryActivateConnector, tryDeactivateConnector } from '../../utils/connections'
 
 const Option = ( {
@@ -20,20 +24,20 @@ const Option = ( {
   onDeactivate: ( connectionType: null ) => void
 } ) => {
 	const [buttonLabel, setButtonLabel] = useState<string>()
-	const [buttonIcon, setButtonIcon] = useState<string>()
+	const [buttonIcon, setButtonIcon] = useState<any>()
 	useEffect( () => {
 		switch ( connectionType ){
 		case 'INJECTED':
 			setButtonLabel( 'Metamask wallet' )
-			setButtonIcon( '/metamask_icon.svg' )
+			setButtonIcon( metamaskIcon )
 			break
 		case 'COINBASE_WALLET':
 			setButtonLabel( 'Coinbase wallet' )
-			setButtonIcon( '/coinbase_icon.png' )
+			setButtonIcon( coinbaseIcon )
 			break
 		case 'WALLET_CONNECT':
 			setButtonLabel( 'Wallet Connect' )
-			setButtonIcon( '/wallet_connect_icon.png' )
+			setButtonIcon( wallectConnectIcon )
 			break
 		}
 	}, [connectionType] )
