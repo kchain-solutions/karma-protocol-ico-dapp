@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Header from 'components/templates/Header'
-import Ico from 'components/templates/Ico'
 import Footer from 'components/templates/Footer'
 import TransactionsList from 'components/molecules/TransactionsList'
+import { Grid } from '@mui/material'
 
 
 const Index = () => {
@@ -25,9 +25,20 @@ const Index = () => {
 
 	return (
 		<>
-			<Header />
-			<TransactionsList txs={data.txs} />
-			<Footer />
+			<Grid container spacing={1}>
+				<Grid item xs={12}>
+					<Header />
+				</Grid>
+				<Grid item xs={12}>
+					<TransactionsList txs={data.txs} />
+				</Grid>
+				<Grid item xs={12}>
+					<Footer />
+				</Grid>
+				
+				
+				
+			</Grid>
 		</>
 	)
     
