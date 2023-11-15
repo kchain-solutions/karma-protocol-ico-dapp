@@ -1,9 +1,10 @@
-import { Chain, CurrentConfig } from '../config'
+import { Chain, CurrentConfig } from './config'
 
 // Chains
 const MAINNET_CHAIN_ID = 1
 const POLYGON_CHAIN_ID = 137
-const SEPOLIA_CHIAN_ID = 11155111
+const MUMBAI_CHAIN_ID = 80001
+const SEPOLIA_CHAIN_ID = 11155111
 
 export const INPUT_CHAIN_ID = CurrentConfig.chain === Chain.POLYGON ? POLYGON_CHAIN_ID : MAINNET_CHAIN_ID
 export const INPUT_CHAIN_URL =

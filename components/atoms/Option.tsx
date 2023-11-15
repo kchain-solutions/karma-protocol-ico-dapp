@@ -45,7 +45,6 @@ const Option = ( {
 	const onClick = async () => {
 		if ( isConnected ) {
 			const deactivation = await tryDeactivateConnector( getConnection( connectionType ).connector )
-			// undefined means the deactivation failed
 			if ( deactivation === undefined ) {
 				return
 			}
