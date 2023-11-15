@@ -2,7 +2,7 @@ import React from 'react'
 
 import { ConnectionType, getHasMetaMaskExtensionInstalled } from '../../utils/connections'
 import { METAMASK_URL } from '../../utils/constants'
-import { Box, Paper } from '@mui/material'
+import { Box, Grid, Paper } from '@mui/material'
 import { palette } from 'style'
 import Option from '../atoms/Option'
 
@@ -60,9 +60,17 @@ const Web3ConnectionOptions = ( {
 
 		return (
 			<>
-				{metaMaskOption}
-				{coinbaseWalletOption}
-				{walletConnectOption}
+				<Grid container spacing={0.2}>
+					<Grid item xs={12} >
+						{metaMaskOption}
+					</Grid>
+					<Grid item xs={12} >
+						{coinbaseWalletOption}
+					</Grid>
+					<Grid item xs={12} >
+						{walletConnectOption}
+					</Grid>
+				</Grid>
 			</>
 		)
 	}

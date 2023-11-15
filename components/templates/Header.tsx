@@ -24,7 +24,7 @@ const Header = () => {
 			</Link>
 			<Link href="/transactions" underline="hover" sx={{ color: 'white',marginRight: '1', '&:hover': { color: palette.pink } }}>
 				<Typography variant="body1">
-                            TRANSACTION
+                            TRANSACTIONS
 				</Typography>
 			</Link>
 			<Link href="https://medium.com/@kchainsolutions/karma-protocol-whitepaper-96dcbd4a9cfb" target="_blank" underline="hover" sx={{ color: 'white', marginRight: '1', '&:hover': { color: palette.pink } }}>

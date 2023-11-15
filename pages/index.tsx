@@ -31,7 +31,7 @@ const Index = () => {
 					<Header />
 				</Grid>
 				<Grid item xs={12} sm={12}>
-					<Ico availableGldkrmAmount={data.available_gldkrm_amount} />
+					<Ico />
 				</Grid>
 				<Grid item xs={12} sm={12}>
 					<AboutKarma availableGldkrmAmount={data.available_gldkrm_amount} />

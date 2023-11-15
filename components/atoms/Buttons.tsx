@@ -6,10 +6,9 @@ import { palette } from 'style'
 export const GradientButton = styled( Button )( () => ( {
 	background: `linear-gradient(20deg, ${palette.pink} 20%, ${palette.yellow} 90%)`,
 	color: 'white',
-	minWidth: '300px',
+	width: '100%',
 	padding: '15px',
-	marginTop: '3px',
-	marginBottom:'3px',
+	display:'block',
 	'&:hover':{
 		background: palette.pink, 
 		backgroundImage: 'none', 
@@ -20,11 +19,9 @@ export const GradientButton = styled( Button )( () => ( {
 export const StandardButton = styled( Button )( () => ( {
 	backgroundColor: palette.pink,
 	color: 'white',
-	padding: '5px',
-	marginTop: '5px',
-	marginBottom:'5px',
+	padding: '10px',
+	width: '100%',
 	minWidth: '125px',
-	height: '40px',
 	'&:hover':{
 		background: palette.cyano, 
 		backgroundImage: 'none', 

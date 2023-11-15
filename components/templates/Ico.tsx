@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { ethers, BigNumber, Contract } from 'ethers'
 import { useWeb3React } from '@web3-react/core'
-import { Paper, Box, TextField, InputAdornment, IconButton, Typography, Button, Snackbar, Link, Divider, FormControl, Select, MenuItem } from '@mui/material'
+import { Paper, Box, TextField, InputAdornment, IconButton, Typography, Snackbar, FormControl, Select, MenuItem, Grid } from '@mui/material'
 import PaymentIcon from '@mui/icons-material/Payment'
 import CloseIcon from '@mui/icons-material/Close'
 import Image from 'next/image'
@@ -12,16 +12,15 @@ import gldkrmAbi from '../../abis/GLDKRM.json'
 import gldkrm_ico from '../../contents/gldkrm_ico.json'
 import { palette } from 'style'
 import { GradientButton } from 'components/atoms/Buttons'
-import ConnectButton from 'components/organisms/ConnectButton'
 
 const STABLECOIN_OPTIONS = [{currency: 'USDC', address: process.env.NEXT_PUBLIC_USDC_ADDRESS}, {currency: 'USDT', address:process.env.NEXT_PUBLIC_USDT_ADDRESS}]
 const RATE = Number( process.env.NEXT_PUBLIC_STABLECOIN_GLDKRM_CON_RATE )
 
-interface ComponentProps {
-	availableGldkrmAmount: string
-}
+import usdcIcon from '../../public/usdc.png'
+import tetherIcon from '../../public/tether.png'
 
-const Ico: React.FC<ComponentProps> = ( {availableGldkrmAmount} ) => {
+
+const Ico = (  ) => {
 
 	const { isActive, account, provider,   } = useWeb3React()
 
@@ -31,7 +30,7 @@ const Ico: React.FC<ComponentProps> = ( {availableGldkrmAmount} ) => {
 	const [stableCoinAddress, setStableCoinAddress] = useState<string>( STABLECOIN_OPTIONS[0].address )
 	const [stableCoinBalance, setStableCoinBalance] = useState<string> ( '' )
 	const [stableCoinContractBalance, setStableCoinContractBalance] = useState<string> ( '' )
-	const [stableCoinInvestAmount, setStableCoinInvestAmount] = useState<string> ( '' )
+	const [stableCoinInvestAmount, setStableCoinInvestAmount] = useState<string> ( '0.00' )
 	const [gldkrmBuyingAmount, setGldKrmBuyingAmount] = useState<string>( '' )
 	const [gldkrmUserBalance, setGldkrmUserBalance] = useState<string>( '0' )
 	const [gldkrmContractBalance, setGldkrmContractBalance] = useState<string>( '0' )
@@ -211,119 +210,97 @@ const Ico: React.FC<ComponentProps> = ( {availableGldkrmAmount} ) => {
 
 	const loadingComponents = () => {
 		if( isActive ){
-			return( <>
-				<Paper elevation={9} sx={{ padding: 2, backgroundColor: palette.purple, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-					<Typography variant='h4'  color={palette.yellow} sx={{ marginBottom: 2 }}>
+			return( <>		
+				<Grid item xs={12}>
+					<Typography textAlign={'center'} variant='h5'  color={palette.yellow}>
                     		INVEST IN GOLD KARMA
 					</Typography>
+				</Grid>
+
+				<Grid item xs={12}>
 					{Boolean( process.env.NEXT_PUBLIC_IS_TEST ) ? (
-						<Typography variant='h5' color={palette.yellow} sx={{ marginBottom: 2 }}>
-                        		ONLY FOR TEST
+						<Typography variant='h6' textAlign={'center'} color={palette.yellow}>
+                        		TESTNET VERSION
 						</Typography>
 					) : null}
+				</Grid>
 
-					<Typography variant="h6" color={palette.cyano} gutterBottom>
+				<Grid item xs={12}>
+					<Typography textAlign={'center'} variant="h6" color={palette.cyano} gutterBottom>
                     		YOUR BALANCE: {gldkrmUserBalance} GLDKRM
 					</Typography>
+				</Grid>
 						
-					<Box width={'60%'}>
-						<TextField
-							label={'Investment Amount'.toUpperCase()}
-							value={stableCoinInvestAmount}
-							type="number"
-							onChange={handleInvestAmountChange}
-							error={Boolean( stableCoinError )}
-							helperText={stableCoinHelperText}
-							fullWidth
-							color='primary'
-							margin="normal"
-							sx={{ backgroundColor: palette.purple_light, input: { color: 'whitesmoke' }, label: { color: 'whitesmoke' }  }}
-							InputProps={{
-								endAdornment: (
-									<InputAdornment position="end">
-										<IconButton
+				<Grid item xs={12}>
+					<TextField
+						label={'buy gldkrm'.toUpperCase()}
+						value={stableCoinInvestAmount}
+						type="number"
+						onChange={handleInvestAmountChange}
+						error={Boolean( stableCoinError )}
+						helperText={stableCoinHelperText}
+						fullWidth
+						color='primary'
+						margin="normal"
+						sx={{ backgroundColor: palette.purple_light, input: { color: 'whitesmoke' }, label: { color: 'whitesmoke' }  }}
+						InputProps={{
+							endAdornment: (
+								<InputAdornment position="end">
+									<IconButton
+										size="small"
+										onClick={() => setStableCoinInvestAmount( stableCoinBalance )}
+										title="Use max"
+									>
+										<Typography color='whitesmoke' variant="caption">{stableCoinBalance} MAX</Typography>
+									</IconButton>
+									<FormControl sx={{ m: 1, minWidth: 120 }}>
+										<Select
+											value={stableCoinOption}
+											onChange={handleStableCoinOptionChange}
+											displayEmpty
+											inputProps={{ 'aria-label': 'Select stablecoin' }}
 											size="small"
-											onClick={() => setStableCoinInvestAmount( stableCoinBalance )}
-											title="Use max"
+											sx={{color:'whitesmoke', backgroundColor: palette.purple}}
 										>
-											<Typography color='whitesmoke' variant="caption">{stableCoinBalance} MAX</Typography>
-										</IconButton>
-										<FormControl sx={{ m: 1, minWidth: 120 }}>
-											<Select
-												value={stableCoinOption}
-												onChange={handleStableCoinOptionChange}
-												displayEmpty
-												inputProps={{ 'aria-label': 'Select stablecoin' }}
-												size="small"
-												sx={{color:'whitesmoke', backgroundColor: palette.purple}}
-											>
-												{STABLECOIN_OPTIONS.map( ( option ) => (
-													<MenuItem key={option.currency} value={option.currency}>
-														<Box sx={{ display: 'flex', alignItems: 'center' }}>
-															{ option.currency === 'USDC' ? 
-																<img src={'/usdc.png'} alt="" style={{ width: 24, height: 24, marginRight: '8px' }} /> 
-																: <img src={'/tether.png'} alt="" style={{ width: 24, height: 24, marginRight: '8px' }} /> }
+											{STABLECOIN_OPTIONS.map( ( option ) => (
+												<MenuItem key={option.currency} value={option.currency}>
+													<Box sx={{ display: 'flex', alignItems: 'center' }}>
+														{ option.currency === 'USDC' ? 
+															<Image src={usdcIcon} alt="USDC ICON" style={{ width: 24, height: 'auto', marginRight: '8px' }} />
+															: <Image src={tetherIcon} alt="USDT ICON" style={{ width: 24, height: 'auto', marginRight: '8px' }} /> }
 														 {option.currency} 
 														 </Box>
-													</MenuItem>
-												) )}
-											</Select>
-										</FormControl>
-									</InputAdornment>
-								),
-							}}
-						/>
-
-						<GradientButton
-							variant="contained"
-							color="primary"
-							fullWidth
-							sx={{ marginY: 2 }}
-							onClick={handleBuy}
-							disabled={checkInvestErrors()}
-						>
-							<PaymentIcon sx={{ marginRight: 1 }} />
-                    		Receive {gldkrmBuyingAmount} GLDKRM
-						</GradientButton>
-						{isAdmin ? <GradientButton
-							variant="contained"
-							color="primary"
-							fullWidth
-							sx={{ marginY: 2 }}
-							onClick={handleWithdrawal}
-						>
-							<PaymentIcon sx={{ marginRight: 1 }} />
-                    		Withdraw {stableCoinContractBalance} {stableCoinOption}
-						</GradientButton> : ''}
-							
-					</Box>
-					<Snackbar
-						open={isOpenSnackbar}
-						onClose={handleClose}
-						autoHideDuration={60000}
-						message={snackbarMessage}
-						anchorOrigin={{
-							vertical: 'bottom',
-							horizontal: 'left',
+												</MenuItem>
+											) )}
+										</Select>
+									</FormControl>
+								</InputAdornment>
+							),
 						}}
-						sx={{'& .MuiSnackbarContent-root': {
-							color: 'whitesmoke', 
-							backgroundColor: palette.pink,
-						}}}
-						action={<React.Fragment>
-							<IconButton
-						  size="small"
-						  aria-label="close"
-						  color="inherit"
-						  onClick={handleClose}
-						  sx={{color: palette.yellow}}
-							>
-						  <CloseIcon fontSize="small" />
-							</IconButton>
-					  </React.Fragment>}
 					/>
-				</Paper>
-				
+				</Grid>
+
+				<Grid item xs={12}>
+					<GradientButton	
+						onClick={handleBuy}
+						disabled={checkInvestErrors()}
+					>
+						<Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+							<PaymentIcon sx={{ marginRight: 1 }} />
+                    		<Typography variant='body2'> Receive {gldkrmBuyingAmount} GLDKRM </Typography>
+						</Box>
+					</GradientButton>		
+				</Grid>
+				{isAdmin ? <Grid item xs={12}> 
+						 <GradientButton
+						variant="contained"
+						onClick={handleWithdrawal}
+					>
+						<Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+							<PaymentIcon sx={{ marginRight: 1 }} />
+							<Typography variant='body2'> Withdraw {stableCoinContractBalance} {stableCoinOption} </Typography>
+						</Box>
+					</GradientButton> </Grid>: ''}
 			</> )
 		}
 		else {
@@ -334,17 +311,45 @@ const Ico: React.FC<ComponentProps> = ( {availableGldkrmAmount} ) => {
 	const PleaseConnect = () => {
 		return (
 			<> 
-				<Box sx={{mt:3}}>
-					<Paper elevation={9} sx={{ padding: 2, backgroundColor: palette.purple, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-						<Typography variant='h4' color={palette.pink} sx={{marginBottom: 2}}> {gldkrm_ico.title_not_connected.toUpperCase()} </Typography>
-					</ Paper> 
-				</Box>
-			</> )
+				<Grid item xs={12}>
+					<Typography variant='h5' textAlign={'center'} color={palette.pink} sx={{marginBottom: 2}}> {gldkrm_ico.title_not_connected.toUpperCase()} </Typography>
+				</ Grid> 
+			</>
+		)
 	}
 
 
 	return ( <>
-		{loadingComponents()}
+		<Paper elevation={9} sx={{backgroundColor: palette.purple }}>
+			<Grid container spacing={1} sx={{ padding: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+				{loadingComponents()}
+			</Grid>
+			<Snackbar
+				open={isOpenSnackbar}
+				onClose={handleClose}
+				autoHideDuration={60000}
+				message={snackbarMessage}
+				anchorOrigin={{
+					vertical: 'bottom',
+					horizontal: 'left',
+				}}
+				sx={{'& .MuiSnackbarContent-root': {
+					color: 'whitesmoke', 
+					backgroundColor: palette.pink,
+				}}}
+				action={<React.Fragment>
+					<IconButton
+						  size="small"
+						  aria-label="close"
+						  color="inherit"
+						  onClick={handleClose}
+						  sx={{color: palette.yellow}}
+					>
+						  <CloseIcon fontSize="small" />
+					</IconButton>
+					  </React.Fragment>}
+			/>
+		</ Paper> 
 	</> )
 
 }

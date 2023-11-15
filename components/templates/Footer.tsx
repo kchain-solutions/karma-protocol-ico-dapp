@@ -4,35 +4,42 @@ import { palette } from 'style'
 
 const Footer = () => {
 	return ( <>
-		<Paper elevation={3}>
-			<Box component="footer" sx={{ backgroundColor: palette.purple, color: 'white', mt: 3, py: 3, minHeight: 150, paddingTop: 2, paddingLeft: 15, paddingRight: 15, paddingBottom: 2 }}>
-				<Grid container spacing={2}>
-					<Grid item sm={4} >
-						<Typography variant="body1" color={palette.cyano} sx={{mt:2}}> {'"... Unlock Goodness, Earn Karma..."'} </Typography>
-					</Grid>
-					<Grid item sm={8}>
-						<Box textAlign="right" pt={1}>
-							<Typography variant='h6' color={palette.cyano} sx={{mb: 1}}> RESOURCES </Typography>
-							<Link href="https://github.com/kchain-solutions/kchain-nft-marketplace"  target="_blank" rel="noopener noreferrer" sx={{ color: 'white', marginRight: '1', '&:hover': { color: palette.cyano } }}>
-                                NFT marketplace repository
-							</Link>
-							<br />
-							<Link href="https://github.com/kchain-solutions/karma-protocol-contracts" target="_blank" rel="noopener noreferrer" sx={{ color: 'white', marginRight: '1', '&:hover': { color: palette.cyano } }}>
-                                Marketplace & DAO Contracts
-							</Link>
-							<br />
-							<Link href="https://kchain.solutions" target="_blank" rel="noopener noreferrer" sx={{ color: 'white', marginRight: '1', '&:hover': { color: palette.cyano } }}>
-                                Kchain Solutions
-							</Link>
-						</Box>
-					</Grid>
-					<Grid item sm={12} sx={{mt:5}}>
-						<Typography variant="body1" align="center">
-                            Copyright © 2023 - Powered by KChain Solutions
-						</Typography>
-					</Grid>
+		<Paper elevation={9} sx={{ backgroundColor: palette.purple, color: 'white' }}>
+			<Grid container spacing={2} sx={{padding: 2}}>
+				<Grid item md={4} xs={12} sx={{display:'flex', flexDirection:'column', alignItems:'center', justifyContent:{md: 'flex-start', xs: 'center'}}}>
+					<Typography variant="body1" color={palette.cyano} sx={{marginBottom: 1}}> {'"... Unlock Goodness, Earn Karma..."'} </Typography>
+					<Typography variant="body1" color={'smokewhite'} > 
+						To know more about the project visit 
+						<Link href="https://earnkarma.io" target="_blank" rel="noopener noreferrer" sx={{color: palette.cyano, marginRight: '1', textDecoration:'none', '&:hover': { color: palette.pink }}}> earnkarma.io </Link> 
+					</Typography>
 				</Grid>
-			</Box>
+
+				<Grid item md={8} xs={12} sx={{display:'flex', alignItems:'center', justifyContent:{md: 'flex-end', xs: 'center'}, textAlign: 'right'}}>
+					<Box sx={{ 
+						textAlign: { xs: 'center', md: 'right' }, 
+						pt: 1, 
+						width: '100%' // Ensure the Box takes the full width of the Grid item
+					}}>
+						<Typography variant='h6' color={palette.cyano} sx={{mb: 1}}> RESOURCES </Typography>
+						<Link href="https://github.com/kchain-solutions/karma-protocol-ico-dapp"  target="_blank" rel="noopener noreferrer" sx={{ color: 'white', textDecoration:'none', marginRight: '1', '&:hover': { color: palette.cyano } }}>
+                                dAPP repository
+						</Link>
+						<br />
+						<Link href="https://github.com/kchain-solutions/karma-protocol-ico-contracts" target="_blank" rel="noopener noreferrer" sx={{ color: 'white', textDecoration:'none', marginRight: '1', '&:hover': { color: palette.cyano } }}>
+                                ICO contracts repository
+						</Link>
+						<br />
+						<Link href="https://kchainsolutions.medium.com/" target="_blank" rel="noopener noreferrer" sx={{ color: 'white', marginRight: '1', textDecoration:'none', '&:hover': { color: palette.cyano } }}>
+                                Blog
+						</Link>
+					</Box>
+				</Grid>
+				<Grid item md={12} xs={12} sx={{mt:5}}>
+					<Typography variant="body1" align="center">
+                            Copyright © {new Date().getFullYear()} - Powered by <Link href="https://kchain.solutions" target="_blank" rel="noopener noreferrer" sx={{color: palette.cyano, marginRight: '1', textDecoration:'none', '&:hover': { color: palette.pink }}}> KCHAIN Solutions </Link> 
+					</Typography>
+				</Grid>
+			</Grid>
 		</Paper >
 	</> )
 }

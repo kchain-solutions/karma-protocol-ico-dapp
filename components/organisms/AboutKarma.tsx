@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, Link, Paper, Typography } from '@mui/material'
+import { Grid, Card, CardContent, Link, Paper, Typography } from '@mui/material'
 import React from 'react'
 import { palette } from 'style'
 import Image from 'next/image'
@@ -12,37 +12,41 @@ interface ComponentProps {
 const AboutKarma: React.FC<ComponentProps> = ( {availableGldkrmAmount} ) => {
 	return (
 		<>
-			<Paper elevation={9} sx={{ mt: 3, backgroundColor: palette.purple }}>
-				<Box textAlign={'center'} sx={{ p: 2 }}>
+			<Paper elevation={9} sx={{ backgroundColor: palette.purple }}>
+				<Grid container spacing={1} sx={{padding: 1.5}}>
+					<Grid item xs={12} textAlign={'center'}>
 
-					<Typography variant="h4" sx={{ mb: 1, color: palette.pink }}>WHY INVEST IN GOLD KARMA?</Typography>
-					<Typography variant="h6" sx={{ mb: 2, color: palette.yellow, marginBottom: 3 }}>
+						<Typography variant="h5" sx={{ mb: 1, color: palette.pink }}>WHY INVEST IN GOLD KARMA?</Typography>
+						<Typography variant="h6" sx={{ mb: 2, color: palette.yellow, marginBottom: 3 }}>
 					ONLY {availableGldkrmAmount} GLDKRM REMAINING FOR PURCHASE
-					</Typography>
-				</Box>
-				<Box textAlign={'justify'} sx={{ p: 2 }}>
-					<Typography variant="body2" color='whitesmoke' sx={{ marginBottom: 1 }}>
+						</Typography>
+					</Grid>
+					<Grid item xs={12} textAlign={'justify'}>
+						<Typography variant="body2" color='whitesmoke' sx={{ marginBottom: 1 }}>
                         GLDKRM offers a unique opportunity to be part of the KARMA PROTOCOL. Upon the deployment of all DAOs on the Mainnet, you stand to earn a portion of the dividends generated through the protocol’s operations.
-					</Typography>
-					<Typography variant="body2" color='whitesmoke' sx={{ marginBottom: 1 }}>
+						</Typography>
+						<Typography variant="body2" color='whitesmoke' sx={{ marginBottom: 1 }}>
                         This page presents an exclusive chance for early investors, with 65% of the total supply available for sale here.
-					</Typography>
-					<Typography variant="body2" color='whitesmoke' sx={{ marginBottom: 1 }}>
+						</Typography>
+						<Typography variant="body2" color='whitesmoke' sx={{ marginBottom: 1 }}>
                         We advise reviewing the whitepaper prior to purchasing. It offers insightful details about the project, aiding in an informed investment decision.
-					</Typography>
-					<Typography variant="body2" color='whitesmoke' sx={{ marginBottom: 1 }}>
+						</Typography>
+						<Typography variant="body2" color='whitesmoke' >
                         The transaction process involves two steps. Initially, you authorize the smart contract to access your stablecoin. Following this, you can exchange your stablecoin for GLDKRM.
-					</Typography>
+						</Typography>
+					</Grid>
 
-					<Box display="flex" justifyContent="center" sx={{ my: 3 }}>
-						<Image src={karma_tokenomics} alt={'Karma tokenomics'} style={{ width: '60%', height: 'auto' }}/>
-					</Box>
+					<Grid item xs={12} textAlign={'center'}>
+						<Image src={karma_tokenomics} alt={'Karma tokenomics'} style={{ width: '90%', height: 'auto' }}/>
+					</Grid>
 
-					<Typography variant='body2' color='whitesmoke'  sx={{ marginBottom: 3 }}>
+					<Grid item xs={12} textAlign={'justify'}>
+						<Typography variant='body2' color='whitesmoke'  sx={{ marginBottom: 3 }}>
     					Before authorizing any transactions, it is crucial to verify the correctness of the contract addresses. Below is a list of certified contracts for your reference:
-					</Typography>
+						</Typography>
+					</Grid>
 
-					<Box textAlign="center" sx={{ p: 2 }}>
+					<Grid item xs={12} textAlign="center">
 	
 						<CustomLinkCard
 							href={`${process.env.NEXT_PUBLIC_TX_SCANNER}address/${process.env.NEXT_PUBLIC_ICO_ADDRESS}`}
@@ -64,8 +68,8 @@ const AboutKarma: React.FC<ComponentProps> = ( {availableGldkrmAmount} ) => {
 							title="USDT Contract"
 							address={process.env.NEXT_PUBLIC_USDT_ADDRESS}
 						/>
-					</Box>
-				</Box>
+					</Grid>
+				</Grid>
 			</Paper>
 		</>
 	)
