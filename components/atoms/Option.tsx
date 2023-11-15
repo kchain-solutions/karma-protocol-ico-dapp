@@ -9,6 +9,7 @@ import coinbaseIcon from '../../public/coinbase_icon.png'
 import wallectConnectIcon from '../../public/wallet_connect_icon.png'
 
 import { ConnectionType, getConnection, tryActivateConnector, tryDeactivateConnector } from '../../utils/connections'
+import { AddEthereumChainParameter } from '@web3-react/types'
 
 const Option = ( {
 	isEnabled,
@@ -23,6 +24,18 @@ const Option = ( {
   onActivate: ( connectionType: ConnectionType ) => void
   onDeactivate: ( connectionType: null ) => void
 } ) => {
+
+	const addChainParameter: AddEthereumChainParameter = {
+		chainId: Number( process.env.NEXT_PUBLIC_CHAIN_ID ),
+		chainName: process.env.NEXT_PUBLIC_CHAIN_NAME,
+		rpcUrls: [''],
+		nativeCurrency: {
+			name:process.env.NEXT_PUBLIC_NATIVE_CURRENCY_NAME, 
+			symbol: process.env.NEXT_PUBLIC_NATIVE_CURRENCY_SYMBOL, 
+			decimals: 18},
+		blockExplorerUrls: [process.env.NEXT_PUBLIC_TX_SCANNER],
+	}
+
 	const [buttonLabel, setButtonLabel] = useState<string>()
 	const [buttonIcon, setButtonIcon] = useState<any>()
 	useEffect( () => {
@@ -45,7 +58,6 @@ const Option = ( {
 	const onClick = async () => {
 		if ( isConnected ) {
 			const deactivation = await tryDeactivateConnector( getConnection( connectionType ).connector )
-			// undefined means the deactivation failed
 			if ( deactivation === undefined ) {
 				return
 			}
@@ -53,8 +65,9 @@ const Option = ( {
 			localStorage.removeItem( 'connection-type' )
 			return
 		}
-
-		const activation = await tryActivateConnector( getConnection( connectionType ).connector )
+		const connection = getConnection( connectionType ).connector
+		await connection.activate( addChainParameter )
+		const activation = await tryActivateConnector( connection )
 		if ( !activation ) {
 			return
 		}
@@ -64,14 +77,15 @@ const Option = ( {
 	}
 
 	return (
-		<Box>
-			<GradientButton onClick={onClick} disabled={!isEnabled} sx={{ justifyContent: 'flex-start' }}>
+		<Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
+			<GradientButton onClick={onClick} disabled={!isEnabled} sx={{ display: 'flex', alignItems: 'center' }}>
 				<Image src={buttonIcon} alt={''} style={{ width: 32, height: 32, marginRight: '8px' }} />
-		  		<Box component="span" sx={{ flexGrow: 1, textAlign: 'left' }}>
+				<Box component="span" sx={{ flexGrow: 1, textAlign: 'left', display: 'flex', alignItems: 'center' }}>
 					{`${isConnected ? 'Disconnect' : 'Connect'} ${buttonLabel}`}
-		  		</Box>
+				</Box>
 			</GradientButton>
-	  </Box>
+		</Box>
+
 	)
 }
 
