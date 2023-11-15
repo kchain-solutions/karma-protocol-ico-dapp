@@ -64,14 +64,15 @@ const Option = ( {
 	}
 
 	return (
-		<Box>
-			<GradientButton onClick={onClick} disabled={!isEnabled} sx={{ justifyContent: 'flex-start' }}>
+		<Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
+			<GradientButton onClick={onClick} disabled={!isEnabled} sx={{ display: 'flex', alignItems: 'center' }}>
 				<Image src={buttonIcon} alt={''} style={{ width: 32, height: 32, marginRight: '8px' }} />
-		  		<Box component="span" sx={{ flexGrow: 1, textAlign: 'left' }}>
+				<Box component="span" sx={{ flexGrow: 1, textAlign: 'left', display: 'flex', alignItems: 'center' }}>
 					{`${isConnected ? 'Disconnect' : 'Connect'} ${buttonLabel}`}
-		  		</Box>
+				</Box>
 			</GradientButton>
-	  </Box>
+		</Box>
+
 	)
 }
 

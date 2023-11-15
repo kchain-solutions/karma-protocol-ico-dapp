@@ -60,7 +60,7 @@ const Web3ConnectionOptions = ( {
 
 		return (
 			<>
-				<Grid container spacing={0.2}>
+				<Grid container spacing={0.2} sx={{width: '320px'}}>
 					<Grid item xs={12} >
 						{metaMaskOption}
 					</Grid>
@@ -75,11 +75,10 @@ const Web3ConnectionOptions = ( {
 		)
 	}
 
-	return <Box>
-		<Paper elevation={9} sx={{backgroundColor: palette.purple}}>
-			{getOptions( isConnectionActive )}
-		</Paper>
-	</Box>
+	return <Paper elevation={9} sx={{backgroundColor: palette.purple}}>
+		{getOptions( isConnectionActive )}
+	</Paper>
+
 }
 
 export default Web3ConnectionOptions
