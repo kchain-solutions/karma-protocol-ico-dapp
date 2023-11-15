@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# What is EarnKarma?
 
-## Getting Started
+"EarnKarma is a unique blockchain-based marketplace where you can showcase your art, contribute your time, or utilize your skills to earn. You can also choose to donate a portion of your earnings to causes that resonate with you."
 
-First, run the development server:
+This application serves as a foundation for the EarnKarma marketplace and DAO operations.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+To learn more, read our [lightpaper](./public/Karma%20-%20Marketplace%20of%20Goodness%20-%20lightpaper.pdf).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Initial Coin Offering (ICO)
+Through this application, you can interact with dedicated smart contracts for the ICO phase and purchase GLDKRM using stablecoins (USDC, USDT).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Purchasing GLDKRM not only supports the development of the protocol but also enables the collection of revenues generated from the protocol's usage. These revenues will be distributed based on the blockchain chosen for deployment (ETH for Ethereum, Matic for Polygon, etc.).
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# How to Launch the Application Locally
 
-## Learn More
+1. **Environment Variable Configuration**
+   The following values are used for Sepolia:
+    ```
+    NEXT_PUBLIC_USDC_ADDRESS="0x64AAC408993Fd4092b7DdF0Ca204c475618Ecc8e"
+    NEXT_PUBLIC_USDT_ADDRESS="0x34b4C111078B358d175D42D4B075Dd9E3a8Bb2Ea"
+    NEXT_PUBLIC_GLDKRM_ADDRESS="0xf92735696823056fbF96E1EE58a0666c06AC27EF"
+    NEXT_PUBLIC_ICO_ADDRESS="0x8e5A91f9e981ddfa51f10600857a6F5cE49fC6E4"
+    NEXT_PUBLIC_STABLECOIN_GLDKRM_CON_RATE="30"
+    NEXT_PUBLIC_TX_SCANNER="https://sepolia.etherscan.io/"
+    NEXT_PUBLIC_IS_TEST="true"
+    NODE_PROVIDER="<<RPC ENDPOINT>>"
+    ```
 
-To learn more about Next.js, take a look at the following resources:
+2. **Running the Application Locally**
+Use the command `npm run dev` to start the application.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+# References
+- [EarnKarma.io](https://earnkarma.io)
+- [kchain.solutions](https://kchain.solutions)
+- [Medium blog](https://kchainsolutions.medium.com/)
+- [Follow us on LinkedIn](https://www.linkedin.com/company/kchain-solutions)

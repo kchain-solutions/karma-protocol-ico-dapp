@@ -6,8 +6,8 @@ import { ellipsis } from 'utils/parsing'
 const TransactionsList = ( { txs } ) => {
 	return (
 		<>
-			<Paper elevation={9} sx={{ mt: 3 }}>
-				<Grid container spacing={2} sx={{ padding: 1, backgroundColor: palette.purple }}>
+			<Paper elevation={9}>
+				<Grid container spacing={1} sx={{ padding: 1, backgroundColor: palette.purple, display:'flex' }}>
 					<Grid item xs={12}>
 						<Typography textAlign={'center'} variant="h4" color={palette.cyano} gutterBottom>
               			RECENT TRANSACTION HISTORY
