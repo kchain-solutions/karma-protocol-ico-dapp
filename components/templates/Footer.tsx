@@ -6,19 +6,23 @@ const Footer = () => {
 	return ( 
 		<>
 			<Paper elevation={9} sx={{ backgroundColor: palette.purple, color: 'white' }}>
-				<Grid container spacing={1} sx={{padding: 2}}>
+				<Grid container spacing={1} sx={{padding: 5}}>
 					<Grid item md={4} xs={12} sx={{display:'flex', flexDirection:'column', alignItems:'center', justifyContent:{md: 'flex-start', xs: 'center'}}}>
-						<Typography variant="body1" color={palette.cyano} sx={{marginBottom: 1}}> {'"... Unlock Goodness, Earn Karma..."'} </Typography>
-						<Typography variant="body1" color={'smokewhite'} > 
-						To know more about the project visit 
-							<Link href="https://earnkarma.io" target="_blank" rel="noopener noreferrer" sx={{color: palette.cyano, marginRight: '1', textDecoration:'none', '&:hover': { color: palette.pink }}}> earnkarma.io </Link> 
-						</Typography>
+						<Box sx={{ 
+							textAlign: { xs: 'center', md: 'left' },  
+							width: '100%'
+						}}>
+							<Typography variant="body1" color={palette.cyano} sx={{marginBottom: 1}}> {'"... Unlock Goodness, Earn Karma..."'} </Typography>
+							<Typography variant="body1" color={'smokewhite'} > 
+						To know more visit 
+								<Link href="https://earnkarma.io" target="_blank" rel="noopener noreferrer" sx={{color: palette.cyano, marginRight: '1', textDecoration:'none', '&:hover': { color: palette.pink }}}> earnkarma.io </Link> 
+							</Typography>
+						</Box>
 					</Grid>
 
 					<Grid item md={8} xs={12} sx={{display:'flex', alignItems:'center', justifyContent:{md: 'flex-end', xs: 'center'}, textAlign: 'right'}}>
 						<Box sx={{ 
-							textAlign: { xs: 'center', md: 'right' }, 
-							pt: 1, 
+							textAlign: { xs: 'center', md: 'right' },  
 							width: '100%' // Ensure the Box takes the full width of the Grid item
 						}}>
 							<Typography variant='h6' color={palette.cyano} sx={{mb: 1}}> RESOURCES </Typography>
