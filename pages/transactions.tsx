@@ -25,7 +25,7 @@ const Index = () => {
 
 	return (
 		<>
-			<Grid container spacing={1}>
+			<Grid container spacing={2}>
 				<Grid item xs={12}>
 					<Header />
 				</Grid>
