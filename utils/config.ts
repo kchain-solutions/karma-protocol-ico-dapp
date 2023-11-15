@@ -3,6 +3,7 @@ export enum Chain {
   POLYGON,
   MAINNET,
   SEPOLIA,
+  MUMBAI,
 }
 
 // Inputs that configure this example to run
@@ -12,6 +13,7 @@ interface ExampleConfig {
     polygon: string
     mainnet: string
     sepolia: string
+    mumbai: string
   }
 }
 
@@ -22,5 +24,6 @@ export const CurrentConfig: ExampleConfig = {
 		polygon: '',
 		mainnet: '',
 		sepolia: '',
+		mumbai: ''
 	},
 }

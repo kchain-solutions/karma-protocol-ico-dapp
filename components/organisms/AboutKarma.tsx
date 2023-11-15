@@ -49,22 +49,22 @@ const AboutKarma: React.FC<ComponentProps> = ( {availableGldkrmAmount} ) => {
 					<Grid item xs={12} textAlign="center">
 	
 						<CustomLinkCard
-							href={`${process.env.NEXT_PUBLIC_TX_SCANNER}address/${process.env.NEXT_PUBLIC_ICO_ADDRESS}`}
+							href={`${process.env.NEXT_PUBLIC_TX_SCANNER}/address/${process.env.NEXT_PUBLIC_ICO_ADDRESS}`}
 							title="ICO Contract"
 							address={process.env.NEXT_PUBLIC_ICO_ADDRESS}
 						/>
 						<CustomLinkCard
-							href={`${process.env.NEXT_PUBLIC_TX_SCANNER}address/${process.env.NEXT_PUBLIC_GLDKRM_ADDRESS}`}
+							href={`${process.env.NEXT_PUBLIC_TX_SCANNER}/address/${process.env.NEXT_PUBLIC_GLDKRM_ADDRESS}`}
 							title="GLDKRM Contract"
 							address={process.env.NEXT_PUBLIC_GLDKRM_ADDRESS}
 						/>
 						<CustomLinkCard
-							href={`${process.env.NEXT_PUBLIC_TX_SCANNER}address/${process.env.NEXT_PUBLIC_USDC_ADDRESS}`}
+							href={`${process.env.NEXT_PUBLIC_TX_SCANNER}/address/${process.env.NEXT_PUBLIC_USDC_ADDRESS}`}
 							title="USDC Contract"
 							address={process.env.NEXT_PUBLIC_USDC_ADDRESS}
 						/>
 						<CustomLinkCard
-							href={`${process.env.NEXT_PUBLIC_TX_SCANNER}address/${process.env.NEXT_PUBLIC_USDT_ADDRESS}`}
+							href={`${process.env.NEXT_PUBLIC_TX_SCANNER}/address/${process.env.NEXT_PUBLIC_USDT_ADDRESS}`}
 							title="USDT Contract"
 							address={process.env.NEXT_PUBLIC_USDT_ADDRESS}
 						/>

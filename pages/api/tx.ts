@@ -5,7 +5,7 @@ import  { TransactionResponse } from '../../types/transactions'
 import icoAbi from '../../abis/ICO.json'
 import gldKrmAbi from '../../abis/GLDKRM.json'
 
-const provider = new ethers.providers.JsonRpcProvider( process.env.NODE_PROVIDER )
+const provider = new ethers.providers.JsonRpcProvider( process.env.RPC_PROVIDER )
 const icoContract = new ethers.Contract( process.env.NEXT_PUBLIC_ICO_ADDRESS, icoAbi, provider )
 const gldkrmContract = new ethers.Contract( process.env.NEXT_PUBLIC_GLDKRM_ADDRESS, gldKrmAbi, provider )
 
