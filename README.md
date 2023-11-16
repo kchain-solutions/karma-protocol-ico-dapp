@@ -23,7 +23,13 @@ Purchasing GLDKRM not only supports the development of the protocol but also ena
     NEXT_PUBLIC_STABLECOIN_GLDKRM_CON_RATE="30"
     NEXT_PUBLIC_TX_SCANNER="https://sepolia.etherscan.io"
     NEXT_PUBLIC_IS_TEST="true"
-    NODE_PROVIDER="<<RPC ENDPOINT>>"
+    NEXT_PUBLIC_CHAIN_ID="11155111"
+    NEXT_PUBLIC_CHAIN_NAME="Sepolia"
+    NEXT_PUBLIC_NATIVE_CURRENCY_NAME="Ether"
+    NEXT_PUBLIC_NATIVE_CURRENCY_SYMBOL="ETH"
+    NEXT_PUBLIC_NATIVE_CURRENCY_DECIMALS="18"
+    RPC_PROVIDER="<RPC_ENDPOINT>"
+    CACHE_TTL="30000"
     ```
 
 2. **Running the Application Locally**

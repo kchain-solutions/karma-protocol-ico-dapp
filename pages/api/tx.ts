@@ -19,7 +19,7 @@ let cache: Cache = {
 	lastFetch: 0
 }
 
-const CACHE_DURATION = 1000 * 20 
+const CACHE_DURATION = Number( process.env.CACHE_TTL )
 
 export default async function handler(
 	req: NextApiRequest,
