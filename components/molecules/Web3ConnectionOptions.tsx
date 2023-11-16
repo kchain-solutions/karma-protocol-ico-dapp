@@ -5,6 +5,10 @@ import { METAMASK_URL } from '../../utils/constants'
 import { Box, Grid, Paper } from '@mui/material'
 import { palette } from 'style'
 import Option from '../atoms/Option'
+import { GradientButton } from 'components/atoms/Buttons'
+import Image from 'next/image'
+
+import metamaskIcon from '../../public/metamask_icon.svg'
 
 type ConnectOptionsParams = {
   activeConnectionType: ConnectionType | null
@@ -33,9 +37,12 @@ const Web3ConnectionOptions = ( {
 				onDeactivate={onDeactivate}
 			/>
 		) : (
-			<a href={METAMASK_URL}>
-				<button>Install Metamask</button>
-			</a>
+			<Box >
+				<GradientButton variant="contained" href={METAMASK_URL} rel="noopener noreferrer" sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
+					<Image src={metamaskIcon} alt={'Metamask icon'} style={{ width: 32, height: 32, marginRight: '8px' }} />
+  				Install Metamask
+				</GradientButton>
+			</Box>
 		)
 
 		const coinbaseWalletOption = (
