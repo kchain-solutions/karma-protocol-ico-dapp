@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { ethers, BigNumber, Contract } from 'ethers'
 import { useWeb3React } from '@web3-react/core'
-import { Paper, Box, TextField, InputAdornment, IconButton, Typography, Snackbar, FormControl, Select, MenuItem, Grid } from '@mui/material'
+import { Paper, Box, TextField, InputAdornment, IconButton, Typography, Snackbar, FormControl, Select, MenuItem, Grid, Dialog, DialogContent, CircularProgress } from '@mui/material'
 import PaymentIcon from '@mui/icons-material/Payment'
 import CloseIcon from '@mui/icons-material/Close'
 import Image from 'next/image'
@@ -43,6 +43,8 @@ const Ico = (  ) => {
 
 	const [isOpenSnackbar, setIsOpenSnackbar] = useState( false )
 	const [snackbarMessage, setSnackbarMessage] = useState( '' )
+	const [dialogMessage, setDialogMessage] = useState( '' )
+	const [isBuyLoading, setIsBuyLoading] = useState( false )
 
 	
 	const loadBalances = ( ) => {
@@ -117,29 +119,34 @@ const Ico = (  ) => {
 	}
 
 	const handleBuy = async () => {
+		setSnackbarMessage( '' )
+		setIsOpenSnackbar( false )
+		setDialogMessage( '' )
+
 		if ( !stableCoinError ) {
-			setSnackbarMessage( `Please remain online for the upcoming purchase authorization.\nCurrently authorizing the contract at ${process.env.NEXT_PUBLIC_ICO_ADDRESS} to use ${stableCoinInvestAmount} ${stableCoinOption} on your behalf.` )
-			setIsOpenSnackbar( true )
+			setIsBuyLoading( true )
+			setDialogMessage( `Authorizing the contract ${process.env.NEXT_PUBLIC_ICO_ADDRESS} to spend ${stableCoinInvestAmount} ${stableCoinOption} on your behalf.` )
 	
 			try {
 				//Approve transaction request
 				const txStableCoinResponse = await stableCoinContract.approve( process.env.NEXT_PUBLIC_ICO_ADDRESS, ethers.utils.parseUnits( stableCoinInvestAmount, 18 ) )
 				await txStableCoinResponse.wait()
-				setSnackbarMessage( `Authorization successful.\nInitiating the purchase of ${gldkrmBuyingAmount} GLDKRM. Please wait...` )
-				setIsOpenSnackbar( true )
+				setDialogMessage( `Authorization successful.\nInitiating the purchase of ${gldkrmBuyingAmount} GLDKRM.` )
 
 				//Buy transaction
 				const txBuyResponse = await icoContract.buy( ethers.utils.parseUnits( stableCoinInvestAmount, 18 ), stableCoinAddress )
 				const txBuyReceipt = await txBuyResponse.wait()
+
 				setSnackbarMessage( `Purchase successful. Transaction Hash: ${txBuyReceipt.transactionHash}. Updating balances...` )
 				setIsOpenSnackbar( true )
-				
 				setStableCoinInvestAmount( '0' )
+				setIsBuyLoading( false )
 				loadBalances()
 
 			} catch ( error ) {
 				console.error( 'TX rejected:', error )
 				setSnackbarMessage( `TX rejected: ${error.message}` )
+				setIsBuyLoading( false )
 				setIsOpenSnackbar( true )
 			}
 		}
@@ -290,7 +297,7 @@ const Ico = (  ) => {
 					>
 						<Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 							<PaymentIcon sx={{ marginRight: 1 }} />
-                    		<Typography variant='body2'> Receive {gldkrmBuyingAmount} GLDKRM </Typography>
+                    		<Typography variant='body2'> BUY {gldkrmBuyingAmount} GLDKRM </Typography>
 						</Box>
 					</GradientButton>		
 				</Grid>
@@ -327,6 +334,25 @@ const Ico = (  ) => {
 			<Grid container spacing={1} sx={{ padding: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 				{loadingComponents()}
 			</Grid>
+
+			<Dialog open={isBuyLoading} aria-labelledby="loading-dialog">
+				<DialogContent sx={{
+					backgroundColor: palette.purple_light, 
+					borderColor: 'whitesmoke',
+					borderStyle: 'solid',
+					borderWidth: '1px',
+					display: 'flex', 
+					flexDirection: 'column', 
+					justifyContent: 'center',
+					alignItems: 'center', 
+				}}>
+					<Typography variant='h6' color={palette.cyano} textAlign={'center'} sx={{paddingTop:2, marginBottom: 1}}> PLEASE WAIT </Typography>
+					<CircularProgress sx={{color:palette.cyano, marginBottom: 4}}/>
+					<Typography variant='body1' color={palette.yellow} textAlign={'center'} sx={{marginBottom:1}}> CHECK YOUR WALLET </Typography>
+					<Typography variant='body2' color='whitesmoke' textAlign={'center'} sx={{paddingRight: 2, paddingLeft:2, paddingBottom:2}}> {dialogMessage} </Typography>
+				</DialogContent>
+			</Dialog>
+
 			<Snackbar
 				open={isOpenSnackbar}
 				onClose={handleClose}
@@ -342,13 +368,13 @@ const Ico = (  ) => {
 				}}}
 				action={<React.Fragment>
 					<IconButton
-						  size="small"
-						  aria-label="close"
-						  color="inherit"
-						  onClick={handleClose}
-						  sx={{color: palette.yellow}}
+						size="small"
+						aria-label="close"
+						color="inherit"
+						onClick={handleClose}
+						sx={{color: palette.yellow}}
 					>
-						  <CloseIcon fontSize="small" />
+						<CloseIcon fontSize="small" />
 					</IconButton>
 					  </React.Fragment>}
 			/>
