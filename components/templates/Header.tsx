@@ -40,13 +40,16 @@ const Header = () => {
 			<Paper sx={{backgroundColor: palette.purple, padding: 1}}>
 				<Grid container alignItems="center" justifyContent="flex-end" spacing={1}> 
 					<Grid item md={4} xs={12} > 
-						<Box display="flex" alignItems="center" justifyContent="flex-start">
+						<Box display="flex" alignItems="center" justifyContent="flex-start" sx={{justifyContent:{xs: 'center', md:'flex-start'}}}>
 							<Image src={logo} alt='logo' style={{ width: '60px', height: 'auto' }}/>
-							<Link href="/" underline="none">
-								<Typography variant="h4" sx={{ color: 'whitesmoke' }}>
+							<Box>
+								<Link href="/" underline="none">
+									<Typography variant="h5" sx={{textAlign:'center', color: 'whitesmoke' }}>
                                 	KARMA PROTOCOL
-								</Typography>
-							</Link>
+									</Typography>
+									<Typography variant="body1" sx={{textAlign:'center', color: palette.cyano }}>{'... Unlock goodness, earn Karma...'}</Typography>
+								</Link>
+							</Box>
 						</Box> 
 					</Grid>
 

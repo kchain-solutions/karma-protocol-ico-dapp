@@ -212,8 +212,11 @@ const Ico = (  ) => {
 		if( isActive ){
 			return( <>		
 				<Grid item xs={12}>
-					<Typography textAlign={'center'} variant='h5'  color={palette.yellow}>
+					<Typography variant='h5' textAlign={'center'}  color={palette.yellow}>
                     		INVEST IN GOLD KARMA
+					</Typography>
+					<Typography variant="body2" textAlign={'center'} color='whitesmoke' >
+                        The transaction process involves two steps. Initially, you authorize the smart contract to access your stablecoin. Following this, you can exchange your stablecoin for GLDKRM.
 					</Typography>
 				</Grid>
 
