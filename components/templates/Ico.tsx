@@ -241,7 +241,7 @@ const Ico = (  ) => {
 					</Typography>
 				</Grid>
 						
-				<Grid item xs={12}>
+				<Grid item xs={12} sx={{display:'flex', flexDirection:'columns', justifyContent: 'center', alignItems: 'center'}}>
 					<TextField
 						label={'buy gldkrm'.toUpperCase()}
 						value={stableCoinInvestAmount}
@@ -252,7 +252,7 @@ const Ico = (  ) => {
 						fullWidth
 						color='primary'
 						margin="normal"
-						sx={{ backgroundColor: palette.purple_light, input: { color: 'whitesmoke' }, label: { color: 'whitesmoke' }  }}
+						sx={{ backgroundColor: palette.purple_light, input: { color: 'whitesmoke' }, label: { color: 'whitesmoke' }, width:{xs:'100%', md:'50%'}  }}
 						InputProps={{
 							endAdornment: (
 								<InputAdornment position="end">
@@ -290,10 +290,11 @@ const Ico = (  ) => {
 					/>
 				</Grid>
 
-				<Grid item xs={12}>
+				<Grid item xs={12} sx={{display:'flex', flexDirection:'columns', justifyContent: 'center', alignItems: 'center'}}>
 					<GradientButton	
 						onClick={handleBuy}
 						disabled={checkInvestErrors()}
+						sx={{width:{xs:'100%', md:'50%'}}}
 					>
 						<Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 							<PaymentIcon sx={{ marginRight: 1 }} />
@@ -301,10 +302,11 @@ const Ico = (  ) => {
 						</Box>
 					</GradientButton>		
 				</Grid>
-				{isAdmin ? <Grid item xs={12}> 
-						 <GradientButton
+				{isAdmin ? <Grid item xs={12} sx={{display:'flex', flexDirection:'columns', justifyContent: 'center', alignItems: 'center', marginBottom:1}}> 
+					<GradientButton
 						variant="contained"
 						onClick={handleWithdrawal}
+						sx={{width:{xs:'100%', md:'50%'}}}
 					>
 						<Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 							<PaymentIcon sx={{ marginRight: 1 }} />

@@ -85,7 +85,9 @@ const AboutKarma: React.FC<ComponentProps> = ( {availableGldkrmAmount} ) => {
 }
 
 const CustomLinkCard = ( { href, title, address } ) => (
-	<Card sx={{ mb: 2, backgroundColor: palette.purple_light, width:'100%' }}>
+	<Card sx={{ mb: 2, backgroundColor: palette.purple_light, width:'100%', borderColor: 'whitesmoke',
+		borderStyle: 'solid',
+		borderWidth: '1px', }}>
 		<CardContent>
 			<Typography variant="body1" color={palette.yellow} gutterBottom>
 				{title}
