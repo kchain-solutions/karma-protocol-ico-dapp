@@ -55,15 +55,16 @@ const Web3ConnectionOptions = ( {
 			/>
 		)
 
-		const walletConnectOption = (
+		/* 		const walletConnectOption = (
 			<Option
 				isEnabled={isNoOptionActive || activeConnectionType === ConnectionType.WALLET_CONNECT}
 				isConnected={activeConnectionType === ConnectionType.WALLET_CONNECT}
 				connectionType={ConnectionType.WALLET_CONNECT}
 				onActivate={onActivate}
 				onDeactivate={onDeactivate}
-			/>
+			/> 
 		)
+		*/
 
 		return (
 			<>
@@ -74,9 +75,9 @@ const Web3ConnectionOptions = ( {
 					<Grid item xs={12} >
 						{coinbaseWalletOption}
 					</Grid>
-					<Grid item xs={12} >
+					{/* 					<Grid item xs={12} >
 						{walletConnectOption}
-					</Grid>
+					</Grid> */}
 				</Grid>
 			</>
 		)
