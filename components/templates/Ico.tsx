@@ -48,15 +48,16 @@ const Ico = (  ) => {
 
 	
 	const loadBalances = ( ) => {
-		if ( gldkrmContract ) {
+		if ( gldkrmContract && account ) {
 			gldkrmContract.balanceOf( account ).then( ( balance: BigNumber ) => {
 				setGldkrmUserBalance(  ethers.utils.formatUnits( balance, 'ether' )  )
 			} )
 			gldkrmContract.balanceOf( process.env.NEXT_PUBLIC_ICO_ADDRESS ).then( ( balance: BigNumber ) => {
 				setGldkrmContractBalance( ethers.utils.formatUnits( balance, 'ether' ) )
 			} )
+
 		}
-		if( stableCoinContract ){
+		if( stableCoinContract && account ){
 			stableCoinContract.balanceOf( account ).then( ( balance:BigNumber ) => {
 				setStableCoinBalance( ethers.utils.formatUnits( balance, 'ether' ) )
 			} )
@@ -98,18 +99,29 @@ const Ico = (  ) => {
 			setStableCoinContract( undefined )
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [account, isActive, provider, stableCoinOption] )
+	}, [account, isActive, provider] )
 	
+	useEffect( () => {
+		const stablecoin = new Contract( stableCoinAddress, gldkrmAbi, getSignerOrProvider( provider ) )
+		setStableCoinContract( stablecoin )
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [stableCoinAddress] )
 
 	useEffect( () => {
 		loadBalances()
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	} , [stableCoinContract, gldkrmContract] )
+	} , [stableCoinContract, gldkrmContract, stableCoinInvestAmount] )
 
 	useEffect( ( ) => {
 		updateIsAdmin()
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [icoContract] )
+
+	useEffect( ()=> {
+		if( Number( stableCoinInvestAmount ) > 0 ){
+			setGldKrmBuyingAmount( ( Number( stableCoinInvestAmount ) * RATE ).toString()  )
+		}
+	}, [stableCoinInvestAmount] )
 
 
 	const checkInvestErrors = () => {
@@ -184,11 +196,9 @@ const Ico = (  ) => {
 		setStableCoinOption( e.target.value )
 		if( e.target.value === 'USDC' ){
 			setStableCoinAddress( process.env.NEXT_PUBLIC_USDC_ADDRESS )
-			loadBalances()
 		}
 		if( e.target.value === 'USDT' ){
 			setStableCoinAddress( process.env.NEXT_PUBLIC_USDT_ADDRESS )
-			loadBalances()
 		}
 
 	}
@@ -197,7 +207,6 @@ const Ico = (  ) => {
 		const investingAmount = Number( e.target.value )
 		validateInputStablecoin( e.target.value )
 		setStableCoinInvestAmount( e.target.value )
-		setGldKrmBuyingAmount( ( investingAmount * RATE ).toString()  )
 	}
 
 	const validateInputStablecoin = ( value: string ) => {
@@ -338,6 +347,18 @@ const Ico = (  ) => {
 			</Grid>
 
 			<Dialog open={isBuyLoading} aria-labelledby="loading-dialog">
+				<IconButton
+					aria-label="close"
+					onClick={() => {setIsBuyLoading( false )}}
+					sx={{ 
+						position: 'absolute', 
+						right: 8, 
+						top: 8, 
+						color: ( theme ) => theme.palette.grey[500]
+					}}
+				>
+					<CloseIcon />
+				</IconButton>
 				<DialogContent sx={{
 					backgroundColor: palette.purple_light, 
 					borderColor: 'whitesmoke',
