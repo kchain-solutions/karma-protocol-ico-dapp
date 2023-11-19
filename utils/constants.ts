@@ -13,6 +13,8 @@ export const INPUT_CHAIN_URL =
 export const CHAIN_TO_URL_MAP = {
 	[POLYGON_CHAIN_ID]: CurrentConfig.rpc.polygon,
 	[MAINNET_CHAIN_ID]: CurrentConfig.rpc.mainnet,
+	[MUMBAI_CHAIN_ID]: CurrentConfig.rpc.mainnet,
+	[SEPOLIA_CHAIN_ID]: CurrentConfig.rpc.mainnet,
 }
 
 type ChainInfo = {
@@ -38,6 +40,18 @@ export const CHAIN_INFO: { [key: string]: ChainInfo } = {
 		label: 'Polygon',
 		nativeCurrency: { name: 'Polygon Matic', symbol: 'MATIC', decimals: 18 },
 		rpcUrl: CurrentConfig.rpc.polygon,
+	},
+	[SEPOLIA_CHAIN_ID]: {
+		explorer: 'https://sepolia.etherscan.io',
+		label: 'Sepolia',
+		nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
+		rpcUrl: CurrentConfig.rpc.sepolia,
+	},
+	[MUMBAI_CHAIN_ID]: {
+		explorer: 'https://mumbai.polygonscan.com/',
+		label: 'Mumbai',
+		nativeCurrency: { name: 'Polygon Matic', symbol: 'Matic', decimals: 18 },
+		rpcUrl: CurrentConfig.rpc.mumbai,
 	},
 }
 
