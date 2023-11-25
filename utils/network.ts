@@ -6,12 +6,12 @@ import { CHAIN_TO_URL_MAP, INPUT_CHAIN_ID } from './constants'
 
 export function buildNetworkConnector() {
 	const [web3Network, web3NetworkHooks] = initializeConnector<Network>(
-		(actions) =>
-			new Network({
+		( actions ) =>
+			new Network( {
 				actions,
 				urlMap: CHAIN_TO_URL_MAP,
 				defaultChainId: INPUT_CHAIN_ID,
-			})
+			} )
 	)
 	const networkConnection: Connection = {
 		connector: web3Network,

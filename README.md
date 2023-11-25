@@ -9,6 +9,8 @@ To learn more, read our [lightpaper](./public/Karma%20-%20Marketplace%20of%20Goo
 # Initial Coin Offering (ICO)
 Through this application, you can interact with dedicated smart contracts for the ICO phase and purchase GLDKRM using stablecoins (USDC, USDT).
 
+Give a look to the [ICO Official Page](https://invest.earnkarma.io)
+
 Purchasing GLDKRM not only supports the development of the protocol but also enables the collection of revenues generated from the protocol's usage. These revenues will be distributed based on the blockchain chosen for deployment (ETH for Ethereum, Matic for Polygon, etc.).
 
 # How to Launch the Application Locally
