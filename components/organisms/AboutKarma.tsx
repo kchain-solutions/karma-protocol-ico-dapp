@@ -36,17 +36,31 @@ const AboutKarma: React.FC<ComponentProps> = ( {availableGldkrmAmount} ) => {
 						 </Link>
 						</Typography>
 
+						<Typography variant="body2" color='whitesmoke' sx={{ marginBottom: 1 }}>
+                        Furthermore, all the knowledge we have developed has been uploaded into a custom ChatGPT application. Therefore, if you wish to learn more about the Karma protocol, you can simply ask <Link href={'https://chat.openai.com/g/g-7XBvdFLxS-earnkarma-gpt'} target="_blank" rel="noopener noreferrer" sx={{
+								textDecoration: 'none',
+								color: palette.pink,
+								'&:hover': {
+									color: palette.cyano,
+								},
+							}}> 
+							Karma GPT 
+						 </Link>
+						</Typography>
+
 						<Divider sx={{background: palette.purple_light, marginBottom:1}}/>
 						<Typography variant="body2" color='whitesmoke' sx={{ marginBottom: 1 }}>
-                        GLDKRM presents a unique opportunity to engage with the KARMA PROTOCOL. With the upcoming deployment of the DAO and the NFT marketplace on the Mainnet, holders of GLDKRM will be eligible to receive a share of the dividends. These dividends are proportionate to the amount of gold karma staked. Furthermore, holding GLDKRM grants voting rights within the DAO.
+                        	GLDKRM presents a unique opportunity to engage with the KARMA PROTOCOL. With the upcoming deployment of the DAO and the NFT marketplace on the Mainnet, holders of GLDKRM will be eligible to receive a share of the dividends. These dividends are proportionate to the amount of gold karma staked. Furthermore, holding GLDKRM grants voting rights within the DAO.
 						</Typography>
 						
 						<Divider sx={{background: palette.purple_light, marginBottom:1}}/>
-						<Typography variant='body2'color={'whitesmoke'} sx={{ marginBottom: 1 }}> Early adopters who purchase GLDKRM will be eligible to participate in an airdrop to receive additional GLDKRM. A snapshot will be taken on May 31, 2024, and 10% of the supply will be distributed proportionally based on the volume sold. </Typography>
+						<Typography variant='body2'color={'whitesmoke'} sx={{ marginBottom: 1 }}> 
+							Early adopters who purchase GLDKRM will be eligible to participate in an airdrop to receive additional GLDKRM. A snapshot will be taken on May 31, 2024, and 10% of the supply will be distributed proportionally based on the volume sold. 
+						</Typography>
 						
 						<Divider sx={{background: palette.purple_light, marginBottom:1}}/>
 						<Typography variant="body2" color='whitesmoke' textAlign={'center'} sx={{ marginBottom: 1 }}>
-                        This page presents an exclusive chance for early investors, with 65% of the total supply available for sale here.
+                        	This page presents an exclusive chance for early investors, with 65% of the total supply available for sale here.
 						</Typography>
 						
 					</Grid>
