@@ -30,6 +30,7 @@ Purchasing GLDKRM not only supports the development of the protocol but also ena
     NEXT_PUBLIC_NATIVE_CURRENCY_NAME="Ether"
     NEXT_PUBLIC_NATIVE_CURRENCY_SYMBOL="ETH"
     NEXT_PUBLIC_NATIVE_CURRENCY_DECIMALS="18"
+    NEXT_PUBLIC_ICO_DATE="2023-12-15T14:00:00Z"
     RPC_PROVIDER="<RPC_ENDPOINT>"
     CACHE_TTL="30000"
     ```
