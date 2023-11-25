@@ -1,4 +1,4 @@
-import { Grid, Card, CardContent, Link, Paper, Typography } from '@mui/material'
+import { Grid, Card, CardContent, Link, Paper, Typography, Divider } from '@mui/material'
 import React from 'react'
 import { palette } from 'style'
 import Image from 'next/image'
@@ -36,22 +36,29 @@ const AboutKarma: React.FC<ComponentProps> = ( {availableGldkrmAmount} ) => {
 						 </Link>
 						</Typography>
 
+						<Divider sx={{background: palette.purple_light, marginBottom:1}}/>
 						<Typography variant="body2" color='whitesmoke' sx={{ marginBottom: 1 }}>
                         GLDKRM presents a unique opportunity to engage with the KARMA PROTOCOL. With the upcoming deployment of the DAO and the NFT marketplace on the Mainnet, holders of GLDKRM will be eligible to receive a share of the dividends. These dividends are proportionate to the amount of gold karma staked. Furthermore, holding GLDKRM grants voting rights within the DAO.
 						</Typography>
-						<Typography variant="body2" color='whitesmoke' sx={{ marginBottom: 1 }}>
+						
+						<Divider sx={{background: palette.purple_light, marginBottom:1}}/>
+						<Typography variant='body2'color={'whitesmoke'} sx={{ marginBottom: 1 }}> Early adopters who purchase GLDKRM will be eligible to participate in an airdrop to receive additional GLDKRM. A snapshot will be taken on May 31, 2024, and 10% of the supply will be distributed proportionally based on the volume sold. </Typography>
+						
+						<Divider sx={{background: palette.purple_light, marginBottom:1}}/>
+						<Typography variant="body2" color='whitesmoke' textAlign={'center'} sx={{ marginBottom: 1 }}>
                         This page presents an exclusive chance for early investors, with 65% of the total supply available for sale here.
 						</Typography>
 						
 					</Grid>
 
 					<Grid item xs={12} textAlign={'center'}>
-						<Image src={karma_tokenomics} alt={'Karma tokenomics'} style={{ width: '90%', height: 'auto' }}/>
+						<Image src={karma_tokenomics} alt={'Karma tokenomics'} style={{ width: '80%', height: 'auto' }}/>
 					</Grid>
 
 					<Grid item xs={12} textAlign={'justify'}>
-						<Typography variant='body2' color='whitesmoke'  sx={{ marginBottom: 3 }}>
-    					Before authorizing any transactions, it is crucial to verify the correctness of the contract addresses. Below is a list of certified contracts for your reference:
+						<Divider sx={{background: palette.purple_light}}/>
+						<Typography variant='h5' color={palette.yellow} textAlign={'center'} sx={{ marginBottom: 3, marginTop:3 }}>
+    					CERTIFIED CONTRACTS
 						</Typography>
 					</Grid>
 
