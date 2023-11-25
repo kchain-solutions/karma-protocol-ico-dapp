@@ -17,14 +17,14 @@ const Header = () => {
 
 	const links = <>
 		<Box display="flex" alignItems="center" justifyContent="space-between" sx={{width: '100%'}}>
-			<Link href="/" underline="hover" sx={{ color: 'white',marginRight: '1', '&:hover': { color: palette.pink } }}>
-				<Typography variant="body1">
-                            HOME
-				</Typography>
-			</Link>
 			<Link href="/transactions" underline="hover" sx={{ color: 'white',marginRight: '1', '&:hover': { color: palette.pink } }}>
 				<Typography variant="body1">
                             TRANSACTIONS
+				</Typography>
+			</Link>
+			<Link href="https://chat.openai.com/g/g-7XBvdFLxS-earnkarma-gpt" target="_blank" underline="hover" sx={{ color: 'white',marginRight: '1', '&:hover': { color: palette.pink } }}>
+				<Typography variant="body1">
+                            KARMA GPT
 				</Typography>
 			</Link>
 			<Link href="https://medium.com/@kchainsolutions/karma-protocol-whitepaper-96dcbd4a9cfb" target="_blank" underline="hover" sx={{ color: 'white', marginRight: '1', '&:hover': { color: palette.pink } }}>
