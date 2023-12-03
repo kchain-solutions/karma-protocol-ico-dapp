@@ -6,7 +6,6 @@ import { ConnectionType, PRIORITIZED_CONNECTORS, getConnection, tryActivateConne
 import { StandardButton } from 'components/atoms/Buttons'
 import { ellipsis } from 'utils/parsing'
 import { AddEthereumChainParameter } from '@web3-react/types'
-import { buildInjectedConnector } from 'utils/injected'
 
 
 const ConnectButton = () => {
