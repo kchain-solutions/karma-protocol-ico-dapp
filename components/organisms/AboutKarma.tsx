@@ -93,11 +93,6 @@ const AboutKarma: React.FC<ComponentProps> = ( {availableGldkrmAmount} ) => {
 							title="USDC Contract"
 							address={process.env.NEXT_PUBLIC_USDC_ADDRESS}
 						/>
-						<CustomLinkCard
-							href={`${process.env.NEXT_PUBLIC_TX_SCANNER}/address/${process.env.NEXT_PUBLIC_USDT_ADDRESS}`}
-							title="USDT Contract"
-							address={process.env.NEXT_PUBLIC_USDT_ADDRESS}
-						/>
 					</Grid>
 				</Grid>
 			</Paper>
