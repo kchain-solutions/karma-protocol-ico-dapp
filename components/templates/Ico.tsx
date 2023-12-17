@@ -237,14 +237,6 @@ const Ico = (  ) => {
 				</Grid>
 
 				<Grid item xs={12}>
-					{Boolean( process.env.NEXT_PUBLIC_IS_TEST ) ? (
-						<Typography variant='h6' textAlign={'center'} color={palette.yellow}>
-                        		TESTNET VERSION
-						</Typography>
-					) : null}
-				</Grid>
-
-				<Grid item xs={12}>
 					<Typography textAlign={'center'} variant="h6" color={palette.cyano} gutterBottom>
                     		YOUR BALANCE: {gldkrmUserBalance} GLDKRM
 					</Typography>
