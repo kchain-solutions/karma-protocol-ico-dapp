@@ -63,7 +63,7 @@ const Ico = (  ) => {
 			} )
 
 			stableCoinContract.balanceOf( process.env.NEXT_PUBLIC_ICO_ADDRESS ).then( ( balance:BigNumber ) => {
-				setStableCoinContractBalance( ethers.utils.formatUnits( balance, 'ether' ) )
+				setStableCoinContractBalance( ethers.utils.formatUnits( balance, 6 ) )
 			} )
 		}
 	}
