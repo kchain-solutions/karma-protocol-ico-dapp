@@ -173,7 +173,7 @@ const Ico = (  ) => {
 			//Withdrawal transaction
 			const txBuyResponse = await icoContract.withdrawal( ethers.utils.parseUnits( stableCoinContractBalance, 18 ), stableCoinAddress )
 			const txBuyReceipt = await txBuyResponse.wait()
-			setSnackbarMessage( `Withdrawal transaction succeeded. TX Hash: ${txBuyReceipt.hash}. Please wait...` )
+			setSnackbarMessage( `Withdrawal transaction succeeded. TX Hash: ${txBuyReceipt.transactionHash}. Please wait...` )
 			setIsOpenSnackbar( true )
 				
 			loadBalances()
