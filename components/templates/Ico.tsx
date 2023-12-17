@@ -13,7 +13,7 @@ import gldkrm_ico from '../../contents/gldkrm_ico.json'
 import { palette } from 'style'
 import { GradientButton } from 'components/atoms/Buttons'
 
-const STABLECOIN_OPTIONS = [{currency: 'USDC', address: process.env.NEXT_PUBLIC_USDC_ADDRESS}, {currency: 'USDT', address:process.env.NEXT_PUBLIC_USDT_ADDRESS}]
+const STABLECOIN_OPTIONS = [{currency: 'USDC', address: process.env.NEXT_PUBLIC_USDC_ADDRESS}]
 const RATE = Number( process.env.NEXT_PUBLIC_STABLECOIN_GLDKRM_CON_RATE )
 
 import usdcIcon from '../../public/usdc.png'
@@ -141,9 +141,7 @@ const Ico = (  ) => {
 	
 			try {
 				//Approve transaction request
-				let txStableCoinResponse = await stableCoinContract.approve( process.env.NEXT_PUBLIC_ICO_ADDRESS, 0 )
-				await txStableCoinResponse.wait()
-				txStableCoinResponse = await stableCoinContract.approve( process.env.NEXT_PUBLIC_ICO_ADDRESS, ethers.utils.parseUnits( stableCoinInvestAmount, 6 ) )
+				let txStableCoinResponse = await stableCoinContract.approve( process.env.NEXT_PUBLIC_ICO_ADDRESS, ethers.utils.parseUnits( stableCoinInvestAmount, 6 ) )
 				await txStableCoinResponse.wait()
 				setDialogMessage( `Authorization successful.\nInitiating the purchase of ${gldkrmBuyingAmount} GLDKRM.` )
 
