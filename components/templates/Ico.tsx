@@ -59,7 +59,7 @@ const Ico = (  ) => {
 		}
 		if( stableCoinContract && account ){
 			stableCoinContract.balanceOf( account ).then( ( balance:BigNumber ) => {
-				setStableCoinBalance( ethers.utils.formatUnits( balance, 'ether' ) )
+				setStableCoinBalance( ethers.utils.formatUnits( balance, 6 ) )
 			} )
 
 			stableCoinContract.balanceOf( process.env.NEXT_PUBLIC_ICO_ADDRESS ).then( ( balance:BigNumber ) => {
@@ -141,12 +141,12 @@ const Ico = (  ) => {
 	
 			try {
 				//Approve transaction request
-				const txStableCoinResponse = await stableCoinContract.approve( process.env.NEXT_PUBLIC_ICO_ADDRESS, ethers.utils.parseUnits( stableCoinInvestAmount, 18 ) )
+				const txStableCoinResponse = await stableCoinContract.approve( process.env.NEXT_PUBLIC_ICO_ADDRESS, ethers.utils.parseUnits( stableCoinInvestAmount, 6 ) )
 				await txStableCoinResponse.wait()
 				setDialogMessage( `Authorization successful.\nInitiating the purchase of ${gldkrmBuyingAmount} GLDKRM.` )
 
 				//Buy transaction
-				const txBuyResponse = await icoContract.buy( ethers.utils.parseUnits( stableCoinInvestAmount, 18 ), stableCoinAddress )
+				const txBuyResponse = await icoContract.buy( ethers.utils.parseUnits( stableCoinInvestAmount, 6 ), stableCoinAddress )
 				const txBuyReceipt = await txBuyResponse.wait()
 
 				setSnackbarMessage( `Purchase successful. Transaction Hash: ${txBuyReceipt.transactionHash}. Updating balances...` )
@@ -171,7 +171,7 @@ const Ico = (  ) => {
 		try {
 
 			//Withdrawal transaction
-			const txBuyResponse = await icoContract.withdrawal( ethers.utils.parseUnits( stableCoinContractBalance, 18 ), stableCoinAddress )
+			const txBuyResponse = await icoContract.withdrawal( ethers.utils.parseUnits( stableCoinContractBalance, 6 ), stableCoinAddress )
 			const txBuyReceipt = await txBuyResponse.wait()
 			setSnackbarMessage( `Withdrawal transaction succeeded. TX Hash: ${txBuyReceipt.transactionHash}. Please wait...` )
 			setIsOpenSnackbar( true )
