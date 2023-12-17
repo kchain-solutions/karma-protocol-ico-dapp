@@ -141,7 +141,9 @@ const Ico = (  ) => {
 	
 			try {
 				//Approve transaction request
-				const txStableCoinResponse = await stableCoinContract.approve( process.env.NEXT_PUBLIC_ICO_ADDRESS, ethers.utils.parseUnits( stableCoinInvestAmount, 6 ) )
+				let txStableCoinResponse = await stableCoinContract.approve( process.env.NEXT_PUBLIC_ICO_ADDRESS, 0 )
+				await txStableCoinResponse.wait()
+				txStableCoinResponse = await stableCoinContract.approve( process.env.NEXT_PUBLIC_ICO_ADDRESS, ethers.utils.parseUnits( stableCoinInvestAmount, 6 ) )
 				await txStableCoinResponse.wait()
 				setDialogMessage( `Authorization successful.\nInitiating the purchase of ${gldkrmBuyingAmount} GLDKRM.` )
 
