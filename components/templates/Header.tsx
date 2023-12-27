@@ -37,7 +37,7 @@ const Header = () => {
 
 	return(
 		<>
-			<Paper sx={{backgroundColor: palette.purple, padding: 1}}>
+			<Paper sx={{backgroundColor: palette.purple_deep, padding: 1}}>
 				<Grid container alignItems="center" justifyContent="flex-end" spacing={1}> 
 					<Grid item md={4} xs={12} > 
 						<Box display="flex" alignItems="center" justifyContent="flex-start" sx={{justifyContent:{xs: 'center', md:'flex-start'}}}>

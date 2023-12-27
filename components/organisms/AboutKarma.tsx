@@ -36,17 +36,7 @@ const AboutKarma: React.FC<ComponentProps> = ( {availableGldkrmAmount} ) => {
 						 </Link>
 						</Typography>
 
-						<Typography variant="body2" color='whitesmoke' sx={{ marginBottom: 1 }}>
-                        Furthermore, all the knowledge we have developed has been uploaded into a custom ChatGPT application. Therefore, if you wish to learn more about the Karma protocol, you can simply ask <Link href={'https://chat.openai.com/g/g-7XBvdFLxS-earnkarma-gpt'} target="_blank" rel="noopener noreferrer" sx={{
-								textDecoration: 'none',
-								color: palette.pink,
-								'&:hover': {
-									color: palette.cyano,
-								},
-							}}> 
-							Karma GPT 
-						 </Link>
-						</Typography>
+	
 
 						<Divider sx={{background: palette.purple_light, marginBottom:1}}/>
 						<Typography variant="body2" color='whitesmoke' sx={{ marginBottom: 1 }}>

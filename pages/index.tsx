@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Header from 'components/templates/Header'
-import Ico from 'components/organisms/Ico'
 import Footer from 'components/templates/Footer'
 import AboutKarma from 'components/organisms/AboutKarma'
 import { Grid } from '@mui/material'
 import Countdown from 'components/organisms/Countdown'
 import Banner from 'components/templates/Banner'
+import Buy from 'components/templates/Buy'
 
 
 const Index = () => {
@@ -37,7 +37,7 @@ const Index = () => {
 				</Grid>
 				
 				<Grid item xs={12} sm={12}>
-					<Ico />
+					<Buy />
 				</Grid>
 				<Grid item xs={12} sm={12}>
 					<AboutKarma availableGldkrmAmount={data.available_gldkrm_amount} />

@@ -15,7 +15,7 @@ const Banner: React.FC<ComponentProps> = ( {availableGldkrmAmount} ) => {
 
 	const InfoCard = () => {
 		return (
-			<Card sx={{ minWidth: 275, backgroundColor: palette.purple_deep, height: '100%', position: 'relative' }}>
+			<Card sx={{ minWidth: 275, backgroundColor: palette.purple, height: '100%', position: 'relative' }}>
 				<CardContent sx={{ textAlign: 'center' }}>
 					<Typography variant="h5" component="div" sx={{ color: 'whitesmoke' }}>
                 Only
