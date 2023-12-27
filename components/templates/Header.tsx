@@ -62,10 +62,6 @@ const Header = () => {
 					</Grid>
 
 
-					<Grid item md={12} sm={12} display={'flex'} alignItems="center" justifyContent="flex-end">
-						<Image src={banner} alt='banner' style={{ width: '100%', height: 'auto' }}/>
-					</Grid>
-
 					{!isDesktopScreen && (
 						<Grid item md={12} xs={12}>
 							{links}

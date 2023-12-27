@@ -1,8 +1,9 @@
 import { createTheme } from '@mui/material'
 
 export const palette = {
-	purple: '#37326E',
-	purple_light:'#5d56a3',
+	purple: '#36326B',
+	purple_light:'#4B4685',
+	purple_deep:'#292556',
 	cyano: '#74C4C4',
 	pink: '#D8438C',
 	yellow: '#F9BE38',

@@ -1,4 +1,4 @@
-import Ico from 'components/templates/Ico'
+import Ico from 'components/organisms/Ico'
 import { ethers } from 'ethers'
 
 export function getInvestorVaultConversionRate( {signer, contractAddress, abi} ){
