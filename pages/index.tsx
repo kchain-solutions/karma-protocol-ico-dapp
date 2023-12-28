@@ -3,7 +3,6 @@ import Header from 'components/templates/Header'
 import Footer from 'components/templates/Footer'
 import AboutKarma from 'components/organisms/AboutKarma'
 import { Grid } from '@mui/material'
-import Countdown from 'components/organisms/Countdown'
 import Banner from 'components/templates/Banner'
 import Buy from 'components/templates/Buy'
 

@@ -36,12 +36,12 @@ export default async function handler(
 		const responseData: TransactionResponse = { available_gldkrm_amount: '0', txs: [], is_cached: false }
 
 		const contractBalance = await gldkrmContract.balanceOf( process.env.NEXT_PUBLIC_ICO_ADDRESS )
-		responseData.available_gldkrm_amount = ethers.utils.formatUnits( contractBalance, 'ether' )
+		responseData.available_gldkrm_amount = parseFloat( ethers.utils.formatUnits( contractBalance, 'ether' ) ).toFixed( 1 )
 
 		const latestBlock = await provider.getBlockNumber()
 		const fromBlock = Math.max( 0, latestBlock - 1000000 )
 		const events = await icoContract.queryFilter( 'Bought', fromBlock, latestBlock )
-		const lastTenEvents = events.slice( -15 )
+		const lastTenEvents = events.slice( -20 )
 
 		for ( const event of lastTenEvents ) {
 			const block = await provider.getBlock( event.blockNumber )

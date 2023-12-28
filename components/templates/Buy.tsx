@@ -13,12 +13,12 @@ const Buy = () => {
 				</Typography>
 
 				<Typography variant="body2" sx={{ color: 'whitesmoke', marginBottom:5 }}>
-						The fundamental principle of the Karma Protocol is that true wealth in society is generated through positive actions. Thus, every positive action contributes to the creation of new karma, which is infinitely abundant. The Karma Protocol aims to encourage a positive feedback loop in society.
+				The Karma Protocol aims to motivate Donors, Users, Corporations, and NGOs to perform good deeds through its advanced tokenomics. This system uses blockchain technology to reward altruistic actions, fostering a culture of social responsibility and generosity. By tokenizing good deeds, the protocol encourages a wide range of participants to contribute positively to society, creating a cycle of goodwill and impactful change.
 				</Typography>
 				<Typography variant="body2" sx={{ color: 'whitesmoke', marginBottom:2 }}>
                 Discover more how we do this
 				</Typography>
-				<Button component="a" href="https://kchainsolutions.medium.com/karma-protocol-whitepaper-96dcbd4a9cfb" target='blank' sx={{backgroundColor:palette.purple_light, color:'whitesmoke', fontWeight:'bold', padding:1}}>
+				<Button component="a" href="https://kchainsolutions.medium.com/karma-protocol-whitepaper-96dcbd4a9cfb" target='blank' sx={{backgroundColor:palette.purple_light, color:'whitesmoke', fontWeight:'bold', padding:1, paddingRight:4, paddingLeft:4}}>
 						WHITEPAPER
 				</Button>
 
@@ -32,7 +32,7 @@ const Buy = () => {
 				<Grid item md={6} xs={12}>
 					<Ico />
 				</Grid>
-				<Grid item md={6} xs={12} sx={{backgroundColor:palette.purple}}>
+				<Grid item md={6} xs={12} sx={{backgroundColor:palette.purple, borderRadius:'16px'}}>
 					<InfoCard />
 				</Grid>
 				<Grid item xs={12}>

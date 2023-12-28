@@ -1,13 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react'
 import ConnectButton from 'components/organisms/ConnectButton'
-import { AppBar, Box, Paper, Toolbar, Typography, Link, Grid, useMediaQuery } from '@mui/material'
+import {  Box, Paper, Typography, Link, Grid, useMediaQuery } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { palette } from 'style'
 import Image from 'next/image'
 
 import logo from '../../public/logo.png'
-import banner from '../../public/banner.png'
 
 
 const Header = () => {
@@ -44,7 +43,7 @@ const Header = () => {
 							<Image src={logo} alt='logo' style={{ width: '60px', height: 'auto' }}/>
 							<Box>
 								<Link href="/" underline="none">
-									<Typography variant="h5" sx={{textAlign:'center', color: 'whitesmoke' }}>
+									<Typography variant="h5" sx={{textAlign:'center', color: 'whitesmoke', fontWeight:'bold' }}>
                                 	KARMA PROTOCOL
 									</Typography>
 									<Typography variant="body1" sx={{textAlign:'center', color: palette.cyano }}>{'... Unlock goodness, earn Karma...'}</Typography>

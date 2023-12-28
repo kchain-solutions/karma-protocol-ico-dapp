@@ -325,8 +325,10 @@ const Ico = (  ) => {
 	const PleaseConnect = () => {
 		return (
 			<> 
-				<Grid item xs={12}>
-					<Typography variant='h4' textAlign={'center'} color={palette.yellow} sx={{marginBottom: 2, fontWeight:'bold'}}> {gldkrm_ico.title_not_connected.toUpperCase()} </Typography>
+				<Grid item xs={12} sx={{ height: '100%' }} >
+					<Box display="flex" alignItems="center" justifyContent="center" sx={{ height: '100%' }}>
+						<Typography variant='h4' textAlign={'center'} color={palette.yellow} sx={{marginBottom: 2, fontWeight:'bold'}}> {gldkrm_ico.title_not_connected.toUpperCase()} </Typography>
+					</Box>
 				</ Grid> 
 			</>
 		)
@@ -334,7 +336,7 @@ const Ico = (  ) => {
 
 
 	return ( <>
-		<Grid container spacing={1} sx={{ padding: 1, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+		<Grid container spacing={1} sx={{ padding: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', height:'100%'}}>
 			{loadingComponents()}
 		</Grid>
 

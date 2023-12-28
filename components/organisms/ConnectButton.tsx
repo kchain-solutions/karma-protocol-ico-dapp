@@ -73,7 +73,7 @@ const ConnectButton = () => {
 		if( isActive ) {
 			setButtonLabel( `Account: ${ellipsis( account, 7, 5 )}` )
 		}else{
-			setButtonLabel( 'Connect' )
+			setButtonLabel( 'Connect wallet' )
 		}
 	}, [account, isActive] )
 
