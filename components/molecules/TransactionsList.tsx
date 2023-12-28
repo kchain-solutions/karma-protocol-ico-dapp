@@ -13,28 +13,22 @@ const TransactionsList = ( { txs } ) => {
               			RECENT TRANSACTION HISTORY
 						</Typography>
 					</Grid>
-					<List sx={{ width: '100%' }}>
-						{txs.map( ( tx, index ) => (
-							<React.Fragment key={index}>
-								<Grid item md={12} xs={12}>
-									<ListItem>
-										<Card variant="outlined" sx={{ width: '100%' }}>
-											<CardContent sx={{ backgroundColor: palette.purple_light }}>
-												<Typography color='whitesmoke' variant="body2">GLDKRM purchased amount: {tx.gldkrm_amount}</Typography>
-												<Typography color='whitesmoke' variant="body2">
-                          							Transaction hash: 
-													<Link href={`${process.env.NEXT_PUBLIC_TX_SCANNER}/tx/${tx.tx_hash}`} target="_blank" rel="noopener noreferrer">
-														{ellipsis( tx.tx_hash, 16, 14 )}
-													</Link>
-												</Typography>
-												<Typography color='whitesmoke' variant="body2">Date: {tx.date}</Typography>
-											</CardContent>
-										</Card>
-									</ListItem>
-								</Grid>
-							</React.Fragment>
-						) )}
-					</List>
+					{txs.map( ( tx, index ) => (
+						<Grid item md={6} xs={12} key={index}> {/* Each transaction as a Grid item */}
+							<Card variant="outlined" sx={{ width: '100%' }}>
+								<CardContent sx={{ backgroundColor: palette.purple_light }}>
+									<Typography color='whitesmoke' variant="body2">GLDKRM purchased amount: {tx.gldkrm_amount}</Typography>
+									<Typography color='whitesmoke' variant="body2">
+                  						Transaction hash: 
+										<Link href={`${process.env.NEXT_PUBLIC_TX_SCANNER}/tx/${tx.tx_hash}`} target="_blank" rel="noopener noreferrer">
+											{ellipsis( tx.tx_hash, 16, 14 )}
+										</Link>
+									</Typography>
+									<Typography color='whitesmoke' variant="body2">Date: {tx.date}</Typography>
+								</CardContent>
+							</Card>
+						</Grid>
+					) )}
 				</Grid>
 			</Paper>
 		</>

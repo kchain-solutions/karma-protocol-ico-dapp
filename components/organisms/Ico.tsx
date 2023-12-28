@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { ethers, BigNumber, Contract } from 'ethers'
 import { useWeb3React } from '@web3-react/core'
-import { Paper, Box, TextField, InputAdornment, IconButton, Typography, Snackbar, FormControl, Select, MenuItem, Grid, Dialog, DialogContent, CircularProgress } from '@mui/material'
+import { Box, TextField, InputAdornment, IconButton, Typography, Snackbar, FormControl, Select, MenuItem, Grid, Dialog, DialogContent, CircularProgress } from '@mui/material'
 import PaymentIcon from '@mui/icons-material/Payment'
 import CloseIcon from '@mui/icons-material/Close'
 import Image from 'next/image'
@@ -18,6 +18,7 @@ const RATE = Number( process.env.NEXT_PUBLIC_STABLECOIN_GLDKRM_CON_RATE )
 
 import usdcIcon from '../../public/usdc.png'
 import tetherIcon from '../../public/tether.png'
+import ConnectButton from './ConnectButton'
 
 
 const Ico = (  ) => {
@@ -228,11 +229,11 @@ const Ico = (  ) => {
 		if( isActive ){
 			return( <>		
 				<Grid item xs={12}>
-					<Typography variant='h5' textAlign={'center'}  color={palette.yellow}>
-                    		INVEST IN GOLD KARMA
+					<Typography variant='h4' textAlign={'center'}  color={palette.yellow} sx={{fontWeight: 'bold'}}>
+                    		BUY GOLD KARMA
 					</Typography>
 					<Typography variant="body2" textAlign={'center'} color='whitesmoke' >
-                        The transaction process involves two steps. Initially, you authorize the smart contract to access your stablecoin. Following this, you can exchange your stablecoin for GLDKRM.
+                        The purchase process involves two steps. Initially, you authorize the smart contract to access your stablecoin. Following this, you can exchange your stablecoin for GLDKRM.
 					</Typography>
 				</Grid>
 
@@ -253,7 +254,7 @@ const Ico = (  ) => {
 						fullWidth
 						color='primary'
 						margin="normal"
-						sx={{ backgroundColor: palette.purple_light, input: { color: 'whitesmoke' }, label: { color: 'whitesmoke' }, width:{xs:'100%', md:'50%'}  }}
+						sx={{ backgroundColor: palette.purple_light, input: { color: 'whitesmoke' }, label: { color: 'whitesmoke' }, width:{xs:'100%', md:'90%'}  }}
 						InputProps={{
 							endAdornment: (
 								<InputAdornment position="end">
@@ -295,7 +296,7 @@ const Ico = (  ) => {
 					<GradientButton	
 						onClick={handleBuy}
 						disabled={checkInvestErrors()}
-						sx={{width:{xs:'100%', md:'50%'}}}
+						sx={{width:{xs:'100%', md:'90%'}}}
 					>
 						<Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 							<PaymentIcon sx={{ marginRight: 1 }} />
@@ -307,7 +308,7 @@ const Ico = (  ) => {
 					<GradientButton
 						variant="contained"
 						onClick={handleWithdrawal}
-						sx={{width:{xs:'100%', md:'50%'}}}
+						sx={{width:{xs:'100%', md:'90%'}}}
 					>
 						<Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 							<PaymentIcon sx={{ marginRight: 1 }} />
@@ -324,8 +325,10 @@ const Ico = (  ) => {
 	const PleaseConnect = () => {
 		return (
 			<> 
-				<Grid item xs={12}>
-					<Typography variant='h5' textAlign={'center'} color={palette.pink} sx={{marginBottom: 2}}> {gldkrm_ico.title_not_connected.toUpperCase()} </Typography>
+				<Grid item xs={12} sx={{ height: '100%' }} >
+					<Box display="flex" alignItems="center" justifyContent="center" sx={{ height: '100%' }}>
+						<Typography variant='h4' textAlign={'center'} color={palette.yellow} sx={{marginBottom: 2, fontWeight:'bold'}}> {gldkrm_ico.title_not_connected.toUpperCase()} </Typography>
+					</Box>
 				</ Grid> 
 			</>
 		)
@@ -333,67 +336,65 @@ const Ico = (  ) => {
 
 
 	return ( <>
-		<Paper elevation={9} sx={{backgroundColor: palette.purple }}>
-			<Grid container spacing={1} sx={{ padding: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-				{loadingComponents()}
-			</Grid>
+		<Grid container spacing={1} sx={{ padding: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', height:'100%'}}>
+			{loadingComponents()}
+		</Grid>
 
-			<Dialog open={isBuyLoading} aria-labelledby="loading-dialog">
-				<IconButton
-					aria-label="close"
-					onClick={() => {setIsBuyLoading( false )}}
-					sx={{ 
-						position: 'absolute', 
-						right: 8, 
-						top: 8, 
-						color: ( theme ) => theme.palette.grey[500]
-					}}
-				>
-					<CloseIcon />
-				</IconButton>
-				<DialogContent sx={{
-					backgroundColor: palette.purple_light, 
-					borderColor: 'whitesmoke',
-					borderStyle: 'solid',
-					borderWidth: '1px',
-					display: 'flex', 
-					flexDirection: 'column', 
-					justifyContent: 'center',
-					alignItems: 'center', 
-				}}>
-					<Typography variant='h6' color={palette.cyano} textAlign={'center'} sx={{paddingTop:2, marginBottom: 1}}> PLEASE WAIT </Typography>
-					<CircularProgress sx={{color:palette.cyano, marginBottom: 4}}/>
-					<Typography variant='body1' color={palette.yellow} textAlign={'center'} sx={{marginBottom:1}}> CHECK YOUR WALLET </Typography>
-					<Typography variant='body2' color='whitesmoke' textAlign={'center'} sx={{paddingRight: 2, paddingLeft:2, paddingBottom:2}}> {dialogMessage} </Typography>
-				</DialogContent>
-			</Dialog>
-
-			<Snackbar
-				open={isOpenSnackbar}
-				onClose={handleClose}
-				autoHideDuration={60000}
-				message={snackbarMessage}
-				anchorOrigin={{
-					vertical: 'bottom',
-					horizontal: 'left',
+		<Dialog open={isBuyLoading} aria-labelledby="loading-dialog">
+			<IconButton
+				aria-label="close"
+				onClick={() => {setIsBuyLoading( false )}}
+				sx={{ 
+					position: 'absolute', 
+					right: 8, 
+					top: 8, 
+					color: ( theme ) => theme.palette.grey[500]
 				}}
-				sx={{'& .MuiSnackbarContent-root': {
-					color: 'whitesmoke', 
-					backgroundColor: palette.pink,
-				}}}
-				action={<React.Fragment>
-					<IconButton
-						size="small"
-						aria-label="close"
-						color="inherit"
-						onClick={handleClose}
-						sx={{color: palette.yellow}}
-					>
-						<CloseIcon fontSize="small" />
-					</IconButton>
+			>
+				<CloseIcon />
+			</IconButton>
+			<DialogContent sx={{
+				backgroundColor: palette.purple_light, 
+				borderColor: 'whitesmoke',
+				borderStyle: 'solid',
+				borderWidth: '1px',
+				display: 'flex', 
+				flexDirection: 'column', 
+				justifyContent: 'center',
+				alignItems: 'center', 
+			}}>
+				<Typography variant='h6' color={palette.cyano} textAlign={'center'} sx={{paddingTop:2, marginBottom: 1}}> PLEASE WAIT </Typography>
+				<CircularProgress sx={{color:palette.cyano, marginBottom: 4}}/>
+				<Typography variant='body1' color={palette.yellow} textAlign={'center'} sx={{marginBottom:1}}> CHECK YOUR WALLET </Typography>
+				<Typography variant='body2' color='whitesmoke' textAlign={'center'} sx={{paddingRight: 2, paddingLeft:2, paddingBottom:2}}> {dialogMessage} </Typography>
+			</DialogContent>
+		</Dialog>
+
+		<Snackbar
+			open={isOpenSnackbar}
+			onClose={handleClose}
+			autoHideDuration={60000}
+			message={snackbarMessage}
+			anchorOrigin={{
+				vertical: 'bottom',
+				horizontal: 'left',
+			}}
+			sx={{'& .MuiSnackbarContent-root': {
+				color: 'whitesmoke', 
+				backgroundColor: palette.pink,
+			}}}
+			action={<React.Fragment>
+				<IconButton
+					size="small"
+					aria-label="close"
+					color="inherit"
+					onClick={handleClose}
+					sx={{color: palette.yellow}}
+				>
+					<CloseIcon fontSize="small" />
+				</IconButton>
 					  </React.Fragment>}
-			/>
-		</ Paper> 
+		/>
 	</> )
 
 }

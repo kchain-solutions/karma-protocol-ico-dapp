@@ -14,7 +14,7 @@ class MyDocument extends Document {
 					<link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
 					<style>{`
             body {
-              background-color: #5d56a3;
+              background-color: #4B4685;
             }
           `}</style>
 				</Head>

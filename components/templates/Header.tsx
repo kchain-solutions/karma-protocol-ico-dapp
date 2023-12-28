@@ -1,13 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react'
 import ConnectButton from 'components/organisms/ConnectButton'
-import { AppBar, Box, Paper, Toolbar, Typography, Link, Grid, useMediaQuery } from '@mui/material'
+import {  Box, Paper, Typography, Link, Grid, useMediaQuery } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { palette } from 'style'
 import Image from 'next/image'
 
 import logo from '../../public/logo.png'
-import banner from '../../public/banner.png'
 
 
 const Header = () => {
@@ -37,14 +36,14 @@ const Header = () => {
 
 	return(
 		<>
-			<Paper sx={{backgroundColor: palette.purple, padding: 1}}>
+			<Paper sx={{backgroundColor: palette.purple_deep, padding: 1}}>
 				<Grid container alignItems="center" justifyContent="flex-end" spacing={1}> 
 					<Grid item md={4} xs={12} > 
 						<Box display="flex" alignItems="center" justifyContent="flex-start" sx={{justifyContent:{xs: 'center', md:'flex-start'}}}>
 							<Image src={logo} alt='logo' style={{ width: '60px', height: 'auto' }}/>
 							<Box>
 								<Link href="/" underline="none">
-									<Typography variant="h5" sx={{textAlign:'center', color: 'whitesmoke' }}>
+									<Typography variant="h5" sx={{textAlign:'center', color: 'whitesmoke', fontWeight:'bold' }}>
                                 	KARMA PROTOCOL
 									</Typography>
 									<Typography variant="body1" sx={{textAlign:'center', color: palette.cyano }}>{'... Unlock goodness, earn Karma...'}</Typography>
@@ -61,10 +60,6 @@ const Header = () => {
 						<ConnectButton /> 
 					</Grid>
 
-
-					<Grid item md={12} sm={12} display={'flex'} alignItems="center" justifyContent="flex-end">
-						<Image src={banner} alt='banner' style={{ width: '100%', height: 'auto' }}/>
-					</Grid>
 
 					{!isDesktopScreen && (
 						<Grid item md={12} xs={12}>
